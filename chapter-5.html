@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 5 · Duality — One Congruence, Two Readings</title>
+<style>
+  :root {
+    --cream:#faf6ef; --plum:#43203f; --purple:#6a2c91; --crimson:#c0322b;
+    --gold:#b08948; --teal:#177f75; --ink:#2b2226; --grey:#6b6360; --rule:#e2d9c8;
+  }
+  html { background: var(--cream); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; color: var(--ink); background: var(--cream);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem;
+  }
+  .eyebrow a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+  h1 { font-size: 2.4rem; line-height: 1.08; margin: 0 0 .35rem; color: var(--plum); font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-style: italic; font-size: 1.18rem; color: var(--purple); margin: 0 0 1.8rem; line-height: 1.4; }
+  h2 { font-size: 1.4rem; color: var(--plum); margin: 2.6rem 0 .9rem; line-height: 1.25; }
+  h2 .sn { color: var(--gold); font-weight: 400; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--purple); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  a:hover, a:focus-visible { color: var(--crimson); border-bottom-style: solid; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  em { color: inherit; }
+
+  /* Theorem box */
+  .thm { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; }
+  .thm .label { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .thm p { margin-bottom: .5rem; }
+  .thm ol { margin: .2rem 0 .4rem 1.2rem; padding: 0; }
+  .thm li { margin-bottom: .25rem; }
+
+  /* Instrument embeds */
+  figure.inst { margin: 1.6rem 0 2rem; }
+  .inst-frame { border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: #fff; }
+  .inst iframe { display: block; width: 100%; border: 0; }
+  .inst-bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
+    padding: .45rem .1rem 0;
+  }
+  .inst-bar a { color: var(--purple); letter-spacing: .12em; }
+  figcaption.cap { font-size: .88rem; color: var(--grey); line-height: 1.5; padding: .5rem .1rem 0; text-transform: none; letter-spacing: 0; font-family: Georgia, serif; }
+
+  /* Glossary terms */
+  button.term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    border-bottom: 1px dotted var(--teal);
+  }
+  button.term[aria-expanded="true"] { color: var(--teal); border-bottom-style: solid; }
+  #gloss-card {
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem)); background: #fffdf8; color: var(--ink);
+    border: 1px solid var(--gold); border-radius: 4px; box-shadow: 0 6px 24px rgba(43,34,38,.18);
+    padding: .9rem 1.1rem; font-size: .95rem; line-height: 1.55; z-index: 50;
+  }
+  #gloss-card[hidden] { display: none; }
+  #gloss-card b { color: var(--plum); }
+  #gloss-card .close { float: right; margin-left: .8rem; border-bottom: none; font-size: 1.1rem; line-height: 1; background:none; border:none; color: var(--grey); cursor: pointer; }
+  #gloss-card .more { display: block; margin-top: .4rem; font-size: .85rem; }
+
+  /* Companions + checks */
+  .companions { border-top: 1px solid var(--gold); margin-top: 3rem; padding-top: 1rem; }
+  .companions h2 { margin-top: 0; font-size: 1.05rem; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .companions ul { margin: 0; padding: 0 0 0 1.1rem; font-size: .95rem; line-height: 1.7; }
+  .checks { font-size: .88rem; color: var(--grey); border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; line-height: 1.6; }
+
+  /* Chapter nav */
+  nav.chnav { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--gold);
+    margin-top: 2.2rem; padding-top: 1rem; font-size: .95rem; }
+  nav.chnav .dir { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; }
+  nav.chnav .off { color: var(--grey); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow"><a href="index.html">One Congruence, Two Readings</a> · Chapter 5</p>
+    <h1>Duality</h1>
+    <p class="sub">Transpose is duality, at the right level — and the seam is self-dual</p>
+  </header>
+
+  <p>The two readings have looked like transposes of each other since Chapter&nbsp;1: edges under parallel light against rays over a box, a stack of level planes against a pencil through a slit, the count against the compare. Projective geometry has a name for that exchange — <button class="term" data-t="duality">duality</button>, points for planes, joins for meets — and the temptation is to say that the glide reading simply <em>is</em> the cross-slit reading dualized. This chapter says exactly how much of that is true. The naive version is false, for a reason worth having. The right version holds, at the level of depth pencils rather than lines, once the rig is given the one piece of furniture the straightedge cannot supply; and when it holds, the fused locus of Chapter&nbsp;3 turns out to be the self-dual locus, with the same cubic for its equation. The verdict rests on a numerical check that was lost and is now recovered and re-runnable.</p>
+
+  <div class="thm">
+    <span class="label">The amended verdict (8.5′d)</span>
+    <p>With the canonical <button class="term" data-t="anchor">anchor</button> — the sphere x²&nbsp;+&nbsp;y²&nbsp;+&nbsp;z²&nbsp;=&nbsp;Z₁Z₂, centred at the principal point, radius the geometric mean of the slit depths, under which the two slits are mutually polar — the cross-slit congruence is <button class="term" data-t="selfdual">self-dual</button>; the induced <button class="term" data-t="transport">transport</button> along the depth axis is z†&nbsp;=&nbsp;Z₁Z₂/z; in geometric-mean calibration the duality acts on calibrated depth as (channel swap)&nbsp;∘&nbsp;Reciprocal, so it conjugates the glide reading into the cross-slit reading up to the single <button class="term" data-t="fixed">fixed element</button> ρ; and the fused locus is the self-dual locus, equation Δ, on the interior and the diagonal.</p>
+    <p>Two amendments. The fixed element arrives composed with the apparatus channel swap, which is forced, not chosen: mutually polar slits exchange under δ. And the claim lives at <em>depth-pencil</em> level — the pointwise, per-line version is false, the per-line conjugacy being line-dependent.</p>
+    <p style="font-size:.88rem;color:var(--grey);margin-bottom:0;">Passed in amended form, 18 Aug 2026; <a href="sixstep2.js">sixstep2.js</a> re-run 28 Aug, 22/22. Not covered: the r&nbsp;=&nbsp;0 edges, where the anchor degenerates.</p>
+  </div>
+
+  <h2><span class="sn">5.1&nbsp;·</span> Why duality cannot see the split</h2>
+  <p>Start with what duality is not able to do. Within bare projective geometry all perspectivities between two lines form one orbit: conjugate a parallel projection by a projectivity and it becomes a central one. So the distinction between Type&nbsp;A transfer (marks collected along a fibration) and Type&nbsp;B sighting (marks collected through a point) is not projective data at all; it is created by marking a hyperplane and asking whether the centre is incident with the mark. Duality is a projective operation, and it cannot preserve a distinction the projective group does not define. What it does to the mark is exact and instructive: affine space is (Pⁿ,&nbsp;H<sub>∞</sub>), and a duality carries the marked hyperplane to a marked <em>point</em>, δ(H<sub>∞</sub>)&nbsp;=&nbsp;O. The dual of the affine stage is the pinhole stage. The stages dualize; the plays do not, because dualizing also transposes the cast — ranges of point-marks become pencils of line-marks — so a sighting on the point-stage arrives as a pencil-play on the hyperplane-stage, never as a transfer between point-marks.</p>
+  <p>Worse, "duality" is not one map. The correlations of Pⁿ form a <button class="term" data-t="torsor">torsor</button> under the projective group; as δ ranges over them, δ(H<sub>∞</sub>) sweeps every point of the dual space, and the A/B classification on the dual side changes with the choice. There is no canonical answer to where infinity goes unless something anchors it, and a canonical duality is exactly a marked <button class="term" data-t="polarity">polarity</button> — a marked conic, a quadric in space — whose pole of the plane at infinity is its centre. The drawing board is straightedge-only and draws no conics. <em>The missing duality anchor is the compass</em>: the same instrument-poverty that makes even spacing non-constructible makes duality gauge-dependent. Give the board one drawn circle and it acquires a canonical centre, and the dual split snaps into place. That is where the mirror circle of Chapter&nbsp;3 re-enters, now as the anchor of the whole engine.</p>
+
+  <h2><span class="sn">5.2&nbsp;·</span> Stack and spine</h2>
+  <p>In P³ the dual of a graduated <button class="term" data-t="stack">stack</button> of planes is a graduated book of planes whose <button class="term" data-t="spine">spine</button> is a line — a slit. The pencil of planes through the u-slit maps perspectivally onto the range of their trace lines on the picture plane, and a perspectivity of a pencil onto a range is a projective parametrization; the shipped cross-slit coordinate X₀/(1&nbsp;−&nbsp;λr<sub>u</sub>) is a Möbius function of λ, hence <em>is</em> a projective parameter of that pencil. So "cross-slit image coordinates are the two <button class="term" data-t="page">page readings</button>" is symbolic algebra, not a numerical question, and is theorem.</p>
+  <p>The naive identification fails at the next step, and the failure is the chapter's most useful fact. In the assembly, glide's two channels graduate by μ<sub>u</sub>&nbsp;=&nbsp;λr<sub>u</sub> and μ<sub>v</sub>&nbsp;=&nbsp;λr<sub>v</sub>, both functions of depth alone; their level sets are the <em>same</em> family of parallel planes, calibrated twice — one axis, two scales. Dualize that and you get one spine carrying two graduations: coincident slits, the degenerate catalog, not the skew-slit congruence. So "the glide apparatus of an assembly dualizes to the cross-slit apparatus of the same assembly" is false as stated. What survives is a lemma and a sharpened conjecture. The lemma: two lines of P³ meet iff their duals meet, so the class of cross-slit congruences is self-dual — the dual of the lines meeting two slits is the lines meeting the two dual slits. The conjecture, which the check then tested: transpose&nbsp;=&nbsp;duality not within one assembly but as a <em>conjugation across dual assemblies</em>, cross-slit on K&nbsp;≟&nbsp;δ&nbsp;∘&nbsp;(glide on δK)&nbsp;∘&nbsp;δ, up to one fixed element of S₃ — the candidate being the seam relation ρτ&nbsp;=&nbsp;ω, which is exactly the algebraic gap between the two shipped gauges — with the fusion locus predicted to be the self-dual configurations.</p>
+
+  <h2><span class="sn">5.3&nbsp;·</span> The six-step check, and the mirror</h2>
+  <p>The protocol was fixed before the numbers were run: derive the anchor family from the rig's own furniture (slits mutually polar; picture plane and station exchanged), implement δ on Plücker coordinates, compare gauge scalars rather than pictures, identify the linking map against the six anharmonic elements, run on and off the seam, and state the falsifiers. The anchor family has three free parameters and one distinguished member, the sphere of radius √(Z₁Z₂), whose poles pair the picture plane with the depth point at infinity and the plane at infinity with the principal point. Under it the polar of every sampled congruence line is a congruence line, residual zero. The transport had to be read through a section, because the polar plane of a point on a line contains the whole dual line — the first machinery's bug, caught and reported — and the canonical section is the depth axis, the common perpendicular of the slits: there z†&nbsp;=&nbsp;Z₁Z₂/z, line-independent, fixed at the two points where the sphere crosses the axis.</p>
+  <p>The element identified itself. In the geometric-mean calibration ν&nbsp;=&nbsp;z/√(Z₁Z₂) the transport is 1/ν to 10⁻¹⁶ on and off the seam; in a single-channel calibration off the seam <em>no</em> element fits, correctly; in the cross-channel calibrations ν<sub>u</sub>&nbsp;→&nbsp;ν<sub>v</sub>† and ν<sub>v</sub>&nbsp;→&nbsp;ν<sub>u</sub>† are both exactly 1/ν. So δ acts on calibrated depth as (swap)&nbsp;∘&nbsp;ρ, and since ρτ&nbsp;=&nbsp;ω, conjugating the glide reading (τ per channel) by δ gives the cross-slit reading (ω per channel) up to ρ — the candidate, confirmed. The falsifier fired where it should: the swap-variant anchor, with a finite pole for the picture plane, fits no element in any calibration. Anharmonicity <em>selects</em> the geometric-mean sphere. The "marked conic" of §5.1 now has a name: the mirror-sphere R²&nbsp;=&nbsp;Z₁Z₂, VM·VI&nbsp;=&nbsp;VP² at anchor level.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Lumped-together/the-mirror-v2.html" title="The mirror — the camera and the drawing as inverse points" height="700" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>The mirror · v2</span><a href="https://flyingsticks.github.io/Lumped-together/the-mirror-v2.html">Open full page →</a></div>
+    <figcaption class="cap">The anchor in cross-section: the gold circle of radius √(Z₁Z₂) at the principal point. Drag P and its image P† sits at Z₁Z₂/z — inverse points, with the tangent as classical witness. The crossing arrows carry ν<sub>u</sub> to ν<sub>v</sub>† and back, product one; drag the slits together and the crossing collapses, the same-channel product closes, and the configuration is its own mirror image. Fused means self-dual.</figcaption>
+  </figure>
+  <p>On the seam the picture-trace constants of the transport diverge — structurally, not numerically. Off the seam δ maps the trace of a congruence line by a per-channel inversion, two mirror circles with radii in ratio −Z₁/Z₂; on the seam it sends the pinhole pencil to the line field of the slit plane, rays through the eye exchanged with lines in a plane. Collection exchanges with evaluation. The seam is where trace-level duality stops being an inversion and becomes the vector–covector swap itself — the corrected slogan of §5.1, now drawn: duality swaps collection and evaluation across the point/line divide, never within one cast.</p>
+
+  <h2><span class="sn">5.4&nbsp;·</span> The station point, opened</h2>
+  <p>The picture of all this is the station point pulled apart, and there are two ways to pull. Sheet 37 pulls it into two slits at two depths on the same axis of sight — the dial of Chapter&nbsp;3 as a drawing, Z<sub>v</sub>&nbsp;=&nbsp;Z<sub>p</sub>&nbsp;−&nbsp;D/2, Z<sub>h</sub>&nbsp;=&nbsp;Z<sub>p</sub>&nbsp;+&nbsp;D/2, identically the pinhole at D&nbsp;=&nbsp;0. Sheet 38 pulls it into two perpendicular armature axes, a vanishing axis that meters depth and a directing axis that assigns direction, the 1984 construction (pp.&nbsp;88–90), with intercepts coupled by 1/k&nbsp;+&nbsp;1/c&nbsp;=&nbsp;1 so that the image of infinity opens from a point into a line. Both spend perspective's depth fidelity to buy breadth, and they spend it differently: the two slits are the camera's way, the two axes the draftsman's. The same scenes run on both sheets, diverging live from the common pinhole, and the divergence is the duality of this chapter seen from the drafting board.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Glide_projection/station_point_to_slits_v12.html" title="Sheet 37 — station point to slits" height="720" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Sheet 37 · station point to slits · v12</span><a href="https://flyingsticks.github.io/Glide_projection/station_point_to_slits_v12.html">Open full page →</a></div>
+    <figcaption class="cap">One control between two projections. Pull the station point into slits and watch the splay halve, the aspect become a metric gauge, the depth lines bow, and the depth cue saturate — then try the corridor, where the sheet says honestly that the scene belongs to perspective. Drop in your own .obj. 13 checks in check station morph.js.</figcaption>
+  </figure>
+
+  <section class="companions">
+    <h2>Companions to this chapter</h2>
+    <ul>
+      <li><a href="the-six-step-check-v1.md">The six-step check</a> (v1, executed) and <a href="sixstep2.js">sixstep2.js</a> — the verdict, its amendments, and its caveats, re-runnable</li>
+      <li><a href="glide-from-the-stack-v2-1.md">Glide from the stack</a>, v2.1 §§8.3′ and 8.5′ — the anchor and the spine; the ledger of grades this chapter follows</li>
+      <li><a href="the-seam-theorem-v1-1.md">The seam theorem</a>, v1.1 §6 — the bridge this chapter discharges</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/station-point-to-vanishing-axis-v8.html">Sheet 38</a> — the station point pulled into a vanishing axis, on the same scenes</li>
+      <li><a href="https://flyingsticks.github.io/Double-slit-project/32%20tetra%20incidence%20inversion.html">Sheet 32 · incidence inversion</a> and <a href="https://flyingsticks.github.io/Double-slit-project/36%20tetra%20transport.html">sheet 36 · the transport</a> — The Seam §§4–5, Figure IV</li>
+    </ul>
+    <p class="checks"><strong>This chapter checks:</strong> sixstep2.js 22/22 (S1 mutual polarity; S2 Plücker self-duality, residual 0; S3 z†&nbsp;=&nbsp;Z₁Z₂/z line-independent; S4 transport&nbsp;=&nbsp;1/ν at 10⁻¹⁶ in geometric-mean and cross-channel calibrations, no element in single-channel or swap-variant; S5 ν<sub>u</sub>·ν<sub>v</sub>†&nbsp;=&nbsp;1 and the trace constants in closed form; S3b per-line conjugacy line-dependent, spread 3.5–8) · check station morph.js 13/13 (sheet 37) · the-mirror smoke 10/10. Not covered: the r&nbsp;=&nbsp;0 edges, which need their own limit argument; the sampling supports but does not replace a symbolic pass.</p>
+  </section>
+
+  <nav class="chnav" aria-label="Chapter navigation">
+    <a href="chapter-4.html"><span class="dir">← Previous</span>Chapter 4 · The group</a>
+    <a href="index.html" style="align-self:center;">Contents</a>
+    <span class="off" style="text-align:right;"><span class="dir">Next →</span>Chapter 6 · What the two readings buy<br><small>in preparation</small></span>
+  </nav>
+</main>
+
+<div id="gloss-card" hidden role="dialog" aria-label="Glossary definition">
+  <button class="close" aria-label="Close definition">×</button>
+  <span id="gloss-body"></span>
+  <a class="more" href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">Full glossary →</a>
+</div>
+
+<script>
+(function(){
+  var defs = {
+    duality: "<b>Duality.</b> A correlation of projective space: points ↔ planes, lines ↔ lines, joins ↔ meets, incidence preserved. Not one map but a whole family; a specific one, δ, must be chosen by an anchor.",
+    anchor: "<b>Anchor.</b> The quadric whose pole–polar map is the chosen duality. The rig's canonical anchor is the sphere x² + y² + z² = Z₁Z₂: centre at the principal point, radius the geometric mean of the slit depths, slits mutually polar. Anharmonicity of the transport selects it.",
+    selfdual: "<b>Self-dual.</b> A configuration carried to itself by the anchoring duality. The class of cross-slit congruences is self-dual (meeting is self-dual); on the seam a single configuration is its own mirror image — fused means self-dual.",
+    transport: "<b>Transport.</b> The map depth → depth induced by δ, read through the depth axis: z† = Z₁Z₂/z, an involution fixed at ±√(Z₁Z₂). In geometric-mean calibration it is the Reciprocal 1/ν.",
+    fixed: "<b>Fixed element.</b> The one anharmonic map by which δ-conjugation of the glide reading differs from the cross-slit reading: ρ, the Reciprocal — arriving with the apparatus channel swap. Since ρτ = ω it converts the glide gauge τ into the camera gauge ω.",
+    torsor: "<b>Torsor.</b> A set acted on freely and transitively by a group, with no distinguished element. The correlations of Pⁿ are a torsor under the projective group: any duality composed with any projectivity is another duality, so none is canonical without an anchor.",
+    polarity: "<b>Polarity.</b> A duality that is its own inverse, given by a symmetric matrix — pole and polar with respect to a conic or quadric. A canonical duality is exactly a marked polarity; the straightedge draws none, the compass draws one.",
+    stack: "<b>Stack.</b> The glide's graduated family of parallel level planes — Reach's covector picture. Its dual in P³ is a book of planes.",
+    spine: "<b>Spine.</b> The line every plane of a book passes through — under duality, a slit. Cross-slit (u, v) is the two page readings of the two books whose spines are the slits.",
+    page: "<b>Page reading.</b> The projective parameter of a pencil of planes through a slit, read off on the picture plane as a range of trace lines. The cross-slit coordinate X₀/(1 − λr<sub>u</sub>) is exactly this parameter — a theorem, not a numerical question."
+  };
+  var card = document.getElementById('gloss-card'),
+      body = document.getElementById('gloss-body'),
+      open = null;
+  function hide(){ card.hidden = true; if(open){ open.setAttribute('aria-expanded','false'); open = null; } }
+  document.querySelectorAll('button.term').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', function(){
+      if(open === b){ hide(); return; }
+      hide();
+      body.innerHTML = defs[b.dataset.t] || '';
+      card.hidden = false; open = b; b.setAttribute('aria-expanded','true');
+    });
+  });
+  card.querySelector('.close').addEventListener('click', hide);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+})();
+</script>
+</body>
+</html>

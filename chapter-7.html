@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 7 · Plates — One Congruence, Two Readings</title>
+<style>
+  :root {
+    --cream:#faf6ef; --plum:#43203f; --purple:#6a2c91; --crimson:#c0322b;
+    --gold:#b08948; --teal:#177f75; --ink:#2b2226; --grey:#6b6360; --rule:#e2d9c8;
+  }
+  html { background: var(--cream); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; color: var(--ink); background: var(--cream);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem;
+  }
+  .eyebrow a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+  h1 { font-size: 2.4rem; line-height: 1.08; margin: 0 0 .35rem; color: var(--plum); font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-style: italic; font-size: 1.18rem; color: var(--purple); margin: 0 0 1.8rem; line-height: 1.4; }
+  h2 { font-size: 1.4rem; color: var(--plum); margin: 2.6rem 0 .9rem; line-height: 1.25; }
+  h2 .sn { color: var(--gold); font-weight: 400; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--purple); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  a:hover, a:focus-visible { color: var(--crimson); border-bottom-style: solid; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  em { color: inherit; }
+
+  /* Theorem box */
+  .thm { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; }
+  .thm .label { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .thm p { margin-bottom: .5rem; }
+  .thm ol { margin: .2rem 0 .4rem 1.2rem; padding: 0; }
+  .thm li { margin-bottom: .25rem; }
+
+  /* Instrument embeds */
+  figure.inst { margin: 1.6rem 0 2rem; }
+  .inst-frame { border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: #fff; }
+  .inst iframe { display: block; width: 100%; border: 0; }
+  .inst-bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
+    padding: .45rem .1rem 0;
+  }
+  .inst-bar a { color: var(--purple); letter-spacing: .12em; }
+  figcaption.cap { font-size: .88rem; color: var(--grey); line-height: 1.5; padding: .5rem .1rem 0; text-transform: none; letter-spacing: 0; font-family: Georgia, serif; }
+
+  /* Glossary terms */
+  button.term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    border-bottom: 1px dotted var(--teal);
+  }
+  button.term[aria-expanded="true"] { color: var(--teal); border-bottom-style: solid; }
+  #gloss-card {
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem)); background: #fffdf8; color: var(--ink);
+    border: 1px solid var(--gold); border-radius: 4px; box-shadow: 0 6px 24px rgba(43,34,38,.18);
+    padding: .9rem 1.1rem; font-size: .95rem; line-height: 1.55; z-index: 50;
+  }
+  #gloss-card[hidden] { display: none; }
+  #gloss-card b { color: var(--plum); }
+  #gloss-card .close { float: right; margin-left: .8rem; border-bottom: none; font-size: 1.1rem; line-height: 1; background:none; border:none; color: var(--grey); cursor: pointer; }
+  #gloss-card .more { display: block; margin-top: .4rem; font-size: .85rem; }
+
+  /* Companions + checks */
+  .companions { border-top: 1px solid var(--gold); margin-top: 3rem; padding-top: 1rem; }
+  .companions h2 { margin-top: 0; font-size: 1.05rem; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .companions ul { margin: 0; padding: 0 0 0 1.1rem; font-size: .95rem; line-height: 1.7; }
+  .checks { font-size: .88rem; color: var(--grey); border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; line-height: 1.6; }
+
+  /* Chapter nav */
+  nav.chnav { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--gold);
+    margin-top: 2.2rem; padding-top: 1rem; font-size: .95rem; }
+  nav.chnav .dir { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; }
+  nav.chnav .off { color: var(--grey); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow"><a href="index.html">One Congruence, Two Readings</a> · Chapter 7</p>
+    <h1>Plates</h1>
+    <p class="sub">The 1984 plates redrawn as constructions the reader can move — each one placed on the rate square</p>
+  </header>
+
+  <p><em>Glide Projection</em> (1984) is a book of plates: six core lateral armatures on p.&nbsp;93, their assembly into component and series glides on pp.&nbsp;92–97, the vanishing axis and directing axis that organize them on pp.&nbsp;88–90, and two rules for putting them together. This chapter redraws those plates as instruments. Each is the glide reading of a congruence the camera could also have taken — Chapter&nbsp;1's inversion, plate by plate — and each caption says which corner, edge or interior point of the <button class="term" data-t="ratesquare">rate square</button> it sits on, so that a reader who has followed the theorems can see where the drawing lives in the family, and a reader who has the book open can see what the theorems were always describing. Every construction here keeps one rule the book states as craft and the theorems restate as necessity: the whole image shares one plane at infinity.</p>
+
+  <div class="thm">
+    <span class="label">The two rules of assembly (p.&nbsp;93), and what they force</span>
+    <p><b>Rule 1.</b> Armatures join with no gaps or overlaps. <b>Rule 2.</b> The whole image shares one infinity plane.</p>
+    <p><b>What follows.</b> An assembly has no free parameters beyond its seat and its <button class="term" data-t="joint">joints</button>. Continuity at each joint forces the shear of every flank herringbone (to u₀&nbsp;−&nbsp;x<sub>joint</sub>) and the drift of every corner box (to (u₀&nbsp;−&nbsp;x,&nbsp;v₀&nbsp;−&nbsp;y)); in a chain, C⁰ continuity forces the next cell's intercept, c<sub>i+1</sub>&nbsp;=&nbsp;c<sub>i</sub>&nbsp;+&nbsp;(r<sub>i+1</sub>&nbsp;−&nbsp;r<sub>i</sub>)·j<sub>i</sub>, so one anchor plus the rates and the joints determines every seat and every shear. Continuity is derived, not tuned.</p>
+    <p style="font-size:.88rem;color:var(--grey);margin-bottom:0;">Exact law per channel, one gauge g(Z)&nbsp;=&nbsp;1&nbsp;−&nbsp;p(Z)/p(Z<sub>g</sub>): inside the centre cell w&nbsp;=&nbsp;ŝ&nbsp;+&nbsp;(ŵ&nbsp;−&nbsp;ŝ)(1&nbsp;−&nbsp;g); outside it w&nbsp;=&nbsp;ŵ&nbsp;+&nbsp;(ŝ&nbsp;−&nbsp;joint)·g. Verified live in sheets 40 and 41: every cell reduces to a sheet-39 core armature to machine precision.</p>
+  </div>
+
+  <h2><span class="sn">7.1&nbsp;·</span> The six armatures, placed</h2>
+  <p>The plate on p.&nbsp;93 names six core lateral armatures: vanishing point, vanishing plane, vanishing axis, herringbone, keystone, box. Chapter&nbsp;2 read them off the rate pair as the classification of where the image of infinity lands; here is the same table read as a map. The <button class="term" data-t="armature">vanishing point</button> is (1,&nbsp;1), the perspective corner — a point catches infinity. The vanishing plane is (λ,&nbsp;λ), on the diagonal — infinity arrives early, as an area. The vanishing axis is (1&nbsp;−&nbsp;k,&nbsp;1), on the r<sub>v</sub>&nbsp;=&nbsp;1 edge, with its directing axis beyond the plane of infinity. The herringbone is (0,&nbsp;1), a pushbroom corner — vanishing one way, parallel the other. The keystone is (0,&nbsp;λ), on the r<sub>u</sub>&nbsp;=&nbsp;0 edge. The box is (0,&nbsp;0), orthographic, where infinity is never marked. So three of the six sit exactly on the seam — the vanishing point, the vanishing plane, and the box — and are cameras as much as drawings; the herringbone and keystone sit on a zero edge, fused but with one channel silent; and only the vanishing axis, the book's signature armature, lives on an r&nbsp;=&nbsp;1 edge off the seam, where the camera's reading of the same lines would bow. That is the one plate in the book the camera cannot take straight.</p>
+
+  <h2><span class="sn">7.2&nbsp;·</span> Component glides — the double herringbone and the eggcrate</h2>
+  <p>The double herringbone (p.&nbsp;97) is a vanishing-point armature between two herringbones — the middle row of an eggcrate. The eggcrate (pp.&nbsp;94–95) is that row crossed with its column: one point at the crossing of two vanishing axes, four herringbones on the edges, four boxes in the corners. The joints are the cell boundaries; the seat is the centre vanishing point, anywhere inside the centre cell. The tiled image of infinity shows the forced continuity: axis segments and four congruent corner rectangles meeting exactly at the seat. And the red diagonal probe demonstrates p.&nbsp;96's eccentric effect live — a nonaxial transverse line bends where it crosses an armature joint, by exactly the slope ratio (1&nbsp;−&nbsp;g).</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Glide_projection/component-glides-v1.html" title="Sheet 40 — component glides: the double herringbone and the eggcrate" height="740" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Sheet 40 · component glides · v1</span><a href="https://flyingsticks.github.io/Glide_projection/component-glides-v1.html">Open full page →</a></div>
+    <figcaption class="cap">On the square: the centre cell is (1,&nbsp;1), the edge cells are herringbones (0,&nbsp;1) and (1,&nbsp;0), the corner cells are boxes (0,&nbsp;0) — an assembly of seam points joined by forced shears. Move the seat and the joints; nothing else is yours to set. Drop in your own .obj. Push the horizontal joints past the staging edges and the eggcrate is the double herringbone to machine precision.</figcaption>
+  </figure>
+
+  <h2><span class="sn">7.3&nbsp;·</span> Series chains</h2>
+  <p>Series configurations "are patterned into linear repeating or nonrepeating sequences of lateral glide armatures" and "often make use of diverging lateral armatures" (p.&nbsp;92). Sheet 41 is the general chain: five cells along one vanishing axis, each with its own rate — converge, keystone, parallel, or diverge, the fans opening toward a frontal focus. The rules of assembly hold by construction and by live enforcement, and the legal rates form a window, 1/g(Z<sub>f</sub>)&nbsp;&lt;&nbsp;r&nbsp;≤&nbsp;1, inside which the width map stays monotone for every depicted depth, all the way through infinity. On the square a chain is a walk along one edge, cell by cell, with the intercepts forced at every step; and the corollary the sliders show is that a truly periodic repeating series must alternate converging with diverging cells — the plate's rhythm is a theorem about intercepts.</p>
+
+  <h2><span class="sn">7.4&nbsp;·</span> Depth projection, and the knit</h2>
+  <p>The plainest plate is the deepest. Lay an irregular shape in the picture plane, true size; carry each vertex back along a straight depth line; at every depth station the whole shape reappears as a true copy, smaller by (1&nbsp;−&nbsp;r·g); divide each edge into equal parts and transfer the division to every copy. That is the <button class="term" data-t="typea">Type A transfer</button> — the fraction of the way along an edge preserved exactly at every depth, for any shape, because the law acts edge by edge and knows nothing of the whole. Three families stay dead straight: the edges of every copy, the depth lines of the vertices, and the depth lines of every part mark, all concurring at the seat. One family bends: a diagonal drawn across a wall cell, straight in space, images as an exact parabola, because a position that changes linearly is drawn at a scale that changes linearly, and the product of two linear laws is a quadratic. Set this beside Chapter&nbsp;1's Bowing Theorem. The camera bends the depth lines and images the diagonal as a Möbius graph; the glide keeps the depth lines straight and bends the diagonal into a parabola. Each reading pays its bow on a different family of lines, and on the seam neither pays.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Glide_projection/the-depth-projection-v1.html" title="Depth projection — equal parts, curving diagonals" height="680" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Depth projection · equal parts, curving diagonals</span><a href="https://flyingsticks.github.io/Glide_projection/the-depth-projection-v1.html">Open full page →</a></div>
+    <figcaption class="cap">Drag the red vertices; the law follows. Toggle between the board's glide and one-point perspective — the diagonal's parabola vanishes only at the perspective corner. On the square: the glide at (r,&nbsp;r), the diagonal; one-point at (1,&nbsp;1).</figcaption>
+  </figure>
+  <p>The depth-plane knit reads the same measure the other way. Scatter four glide line elements, each with picture, vanishing and directing point collinear at a fixed ratio; divide every picture-to-vanishing segment the same way; and same-index marks land on one frontal plane however the lines are scattered, because one proportion is one true depth on every line. One ratio for every line means one isotropic glide, on the diagonal; a vanishing-axis glide is anisotropic and needs a directing point per channel — which is the split element of Chapter&nbsp;2's companions, and the reason the book's signature armature is the one off the seam.</p>
+
+  <h2><span class="sn">7.5&nbsp;·</span> The camera's plates</h2>
+  <p>The plates have a camera reading, and demos 9 and 10 take it: upload a photograph and project it through the slits at Z<sub>v</sub>&nbsp;=&nbsp;150 and Z<sub>h</sub>&nbsp;=&nbsp;250 onto a screen at 400, then run the object through depth. The image flips on one axis when the object passes a slit and collapses to a line when it sits on one — the two channels' magnifications changing sign one at a time, which is the neutral surface's AR&nbsp;=&nbsp;−1 seen as an event rather than a number. The same congruence the plates draw as edges, taking a picture as rays.</p>
+
+  <section class="companions">
+    <h2>Companions to this chapter</h2>
+    <ul>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/series-component-chains-v1.html">Sheet 41 · series component chains</a> — repeating and nonrepeating sequences; the forced intercepts; the closure window</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-depth-knit-v1.html">The depth-plane knit</a> — scattered line elements, one depth</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/six-core-armatures-v1.html">Sheet 39 · the six core armatures</a> — the plate on p.&nbsp;93 run through one gauge (shared with Chapters 2 and 4)</li>
+      <li><a href="https://flyingsticks.github.io/Tetra_engine_complete/9_tetra_image.html">Demo 9</a> and <a href="https://flyingsticks.github.io/Tetra_engine_complete/10_tetra_photo.html">demo 10</a> — a photograph projected through the slits</li>
+      <li><em>Glide Projection: Lateral Architectural Drawing</em> (Van Nostrand Reinhold, 1984): the vanishing and directing axes, pp.&nbsp;88–90; series configurations, p.&nbsp;92; the six armatures and the rules of assembly, p.&nbsp;93; the eggcrate, pp.&nbsp;94–95; the eccentric effect, p.&nbsp;96; the double herringbone, p.&nbsp;97</li>
+    </ul>
+    <p class="checks"><strong>This chapter checks:</strong> sheets 40 and 41 carry live "matched" readouts — assembly, image of ∞, joints, bend at joints, gauge square at Z<sub>g</sub> — against the shipped law, and reduce every cell to a sheet-39 armature to machine precision; the depth projection's parabola is exact by construction (product of two linear laws) and vanishes at r&nbsp;=&nbsp;1; the knit's shared-proportion identity is checked live on every drag. No separate check script is cited for this chapter; the plates are the instruments' own readouts.</p>
+  </section>
+
+  <nav class="chnav" aria-label="Chapter navigation">
+    <a href="chapter-6.html"><span class="dir">← Previous</span>Chapter 6 · What the two readings buy</a>
+    <a href="index.html" style="align-self:center;">Contents</a>
+    <span class="off" style="text-align:right;"><span class="dir">Next →</span>Chapter 8 · The frame<br><small>in preparation</small></span>
+  </nav>
+</main>
+
+<div id="gloss-card" hidden role="dialog" aria-label="Glossary definition">
+  <button class="close" aria-label="Close definition">×</button>
+  <span id="gloss-body"></span>
+  <a class="more" href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">Full glossary →</a>
+</div>
+
+<script>
+(function(){
+  var defs = {
+    ratesquare: "<b>Rate square.</b> The space of readings: a point (r<sub>u</sub>, r<sub>v</sub>) gives the linear contraction rate of each channel. Optical constructions sit on the corners and edges; glide constructions fill the interior. The seam is the diagonal and the two zero edges.",
+    joint: "<b>Joint.</b> A cell boundary where two armatures meet. Rule 1 (no gaps or overlaps) makes the shear on the far side of a joint a forced consequence of the seat and the joint's position, not a choice.",
+    armature: "<b>Armature.</b> The drawn incidence skeleton of a lateral glide — its lines, concurrences, axes and picture plane. The six core armatures of p.&nbsp;93 are the six patterns of recession one gauge can produce, indexed by the rate pair.",
+    typea: "<b>Type A transfer.</b> Marks carried along a fibration — every depth station receives a true copy, and the fraction of the way along an edge is preserved exactly at every depth. The collector is the seat, where every part mark's depth line concurs. Contrast Type B sighting, marks collected through a point."
+  };
+  var card = document.getElementById('gloss-card'),
+      body = document.getElementById('gloss-body'),
+      open = null;
+  function hide(){ card.hidden = true; if(open){ open.setAttribute('aria-expanded','false'); open = null; } }
+  document.querySelectorAll('button.term').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', function(){
+      if(open === b){ hide(); return; }
+      hide();
+      body.innerHTML = defs[b.dataset.t] || '';
+      card.hidden = false; open = b; b.setAttribute('aria-expanded','true');
+    });
+  });
+  card.querySelector('.close').addEventListener('click', hide);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+})();
+</script>
+</body>
+</html>

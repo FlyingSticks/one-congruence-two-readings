@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 1 · The congruence — One Congruence, Two Readings</title>
+<style>
+  :root {
+    --cream:#faf6ef; --plum:#43203f; --purple:#6a2c91; --crimson:#c0322b;
+    --gold:#b08948; --teal:#177f75; --ink:#2b2226; --grey:#6b6360; --rule:#e2d9c8;
+  }
+  html { background: var(--cream); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; color: var(--ink); background: var(--cream);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem;
+  }
+  .eyebrow a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+  h1 { font-size: 2.4rem; line-height: 1.08; margin: 0 0 .35rem; color: var(--plum); font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-style: italic; font-size: 1.18rem; color: var(--purple); margin: 0 0 1.8rem; line-height: 1.4; }
+  h2 { font-size: 1.4rem; color: var(--plum); margin: 2.6rem 0 .9rem; line-height: 1.25; }
+  h2 .sn { color: var(--gold); font-weight: 400; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--purple); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  a:hover, a:focus-visible { color: var(--crimson); border-bottom-style: solid; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  em { color: inherit; }
+
+  /* Theorem box */
+  .thm { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; }
+  .thm .label { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .thm p { margin-bottom: .5rem; }
+  .thm ol { margin: .2rem 0 .4rem 1.2rem; padding: 0; }
+  .thm li { margin-bottom: .25rem; }
+
+  /* Instrument embeds */
+  figure.inst { margin: 1.6rem 0 2rem; }
+  .inst-frame { border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: #fff; }
+  .inst iframe { display: block; width: 100%; border: 0; }
+  .inst-bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
+    padding: .45rem .1rem 0;
+  }
+  .inst-bar a { color: var(--purple); letter-spacing: .12em; }
+  figcaption.cap { font-size: .88rem; color: var(--grey); line-height: 1.5; padding: .5rem .1rem 0; text-transform: none; letter-spacing: 0; font-family: Georgia, serif; }
+
+  /* Glossary terms */
+  button.term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    border-bottom: 1px dotted var(--teal);
+  }
+  button.term[aria-expanded="true"] { color: var(--teal); border-bottom-style: solid; }
+  #gloss-card {
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem)); background: #fffdf8; color: var(--ink);
+    border: 1px solid var(--gold); border-radius: 4px; box-shadow: 0 6px 24px rgba(43,34,38,.18);
+    padding: .9rem 1.1rem; font-size: .95rem; line-height: 1.55; z-index: 50;
+  }
+  #gloss-card[hidden] { display: none; }
+  #gloss-card b { color: var(--plum); }
+  #gloss-card .close { float: right; margin-left: .8rem; border-bottom: none; font-size: 1.1rem; line-height: 1; background:none; border:none; color: var(--grey); cursor: pointer; }
+  #gloss-card .more { display: block; margin-top: .4rem; font-size: .85rem; }
+
+  /* Companions + checks */
+  .companions { border-top: 1px solid var(--gold); margin-top: 3rem; padding-top: 1rem; }
+  .companions h2 { margin-top: 0; font-size: 1.05rem; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .companions ul { margin: 0; padding: 0 0 0 1.1rem; font-size: .95rem; line-height: 1.7; }
+  .checks { font-size: .88rem; color: var(--grey); border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; line-height: 1.6; }
+
+  /* Chapter nav */
+  nav.chnav { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--gold);
+    margin-top: 2.2rem; padding-top: 1rem; font-size: .95rem; }
+  nav.chnav .dir { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; }
+  nav.chnav .off { color: var(--grey); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow"><a href="index.html">One Congruence, Two Readings</a> · Chapter 1</p>
+    <h1>The congruence</h1>
+    <p class="sub">One set of lines — and the two ways of drawing it that the rest of the book keeps apart</p>
+  </header>
+
+  <p>There is one object in this book. Through a <button class="term" data-t="pinhole">pinhole</button> every scene point sends one ray to one image point, and all the rays share a centre. Replace the pinhole by two <button class="term" data-t="slit">slits</button> at two depths and every scene point <em>still</em> sends exactly one line — the unique line through the point that meets both slits — but the lines no longer share a centre. That two-parameter family is a <button class="term" data-t="congruence">line congruence</button>, classical since Kummer, and it is the only thing any chapter draws. What changes from chapter to chapter is not the lines but the <button class="term" data-t="reading">reading</button> given to them: the same congruence used as <em>edges under parallel light</em> is the 1984 drawing construction, the <button class="term" data-t="glide">glide</button>; used as <em>rays over a rectilinear box</em> it is the <button class="term" data-t="crossslit">cross-slit</button> camera. The drafting table is where both are visible at once, and the point of this chapter is only to make the reader see one set of lines where two subjects have always been taught.</p>
+
+  <div class="thm">
+    <span class="label">The congruence</span>
+    <p>Fix a picture plane at z&nbsp;=&nbsp;0, a vertical slit at depth Z<sub>v</sub> and a horizontal slit at depth Z<sub>h</sub>. To each scene point X there corresponds one line ℓ(X): the transversal through X of the two slit lines. The family {ℓ} is a (1,1) congruence — one line through a general point, one line in a general plane — and its lines pierce the picture plane in the image.</p>
+    <p>Two graduations can be laid along ℓ(X). The glide marks depth in equal steps (depth lines straight, the picture plane true-size); the cross-slit marks it by foreshortening (each slit magnifies its own axis by the perspective factor for its own depth). Neither graduation changes the lines. The pinhole is the case Z<sub>v</sub>&nbsp;=&nbsp;Z<sub>h</sub>: the congruence collapses to a pencil and the two graduations coincide.</p>
+    <p style="font-size:.88rem;color:var(--grey);margin-bottom:0;">Not a theorem — a definition, and the standing convention for every figure that follows.</p>
+  </div>
+
+  <h2><span class="sn">1.1&nbsp;·</span> Through a pinhole, through two slits</h2>
+  <p>Before either reading is named, the congruence can be looked at as a light field. The base engine draws the lines themselves: choose a target depth, and every point of the frontal square at that depth is joined to the picture plane by its one transversal of the two slits. Slide the slits apart and the bundle stops being a cone; slide them together and it becomes one. The number in the corner — the aspect a frontal square casts — is the first hint that the lines carry depth information a pinhole does not, and Chapter&nbsp;6 will cash it. For now it is enough to watch the ruled surface and believe that it is one thing.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Tetra_engine_complete/1_tetra_engine_BASE.html" title="Tetrahedral light field — the congruence as a ruled surface" height="620" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Tetra engine · base</span><a href="https://flyingsticks.github.io/Tetra_engine_complete/1_tetra_engine_BASE.html">Open full page →</a></div>
+    <figcaption class="cap">The lines of the congruence for one frontal target, drawn as a ruled surface between the two slits and the sensor. Move the target in depth and the surface — and the aspect ratio it reports — changes; move the slits together and it becomes a pinhole's cone. The engine's own palette: vertical slit blue, horizontal slit green.</figcaption>
+  </figure>
+  <p>A room under the same lines makes the second point. Its straight depth edges arrive on the screen as curves — each a Möbius graph, a hyperbola with axis-parallel asymptotes, the <a href="https://flyingsticks.github.io/Double-slit-project/28%20tetra%20bowing.html">Bowing Theorem</a> of the companions. That bow is the cross-slit reading's signature, and Chapter&nbsp;3 will show it is proportional to one cubic. The glide reading of the same room, in demo&nbsp;11, has no bow at all: same lines, straight tracks.</p>
+
+  <h2><span class="sn">1.2&nbsp;·</span> The drafting table</h2>
+  <p>Sheet 35 is the congruence laid out as a draftsman would lay it out: plan, side and front on one board, the two slits at the rig depths Z<sub>v</sub>&nbsp;=&nbsp;150 and Z<sub>h</sub>&nbsp;=&nbsp;250, a box between near and far, and the screen at zero. The trace runs one point of the box to its image by the two-view construction — down to the vertical slit in plan, across to the horizontal slit in side, and up to the front — and the sweep does it for every point on an edge. This is the instrument that later measures the seam; here it is only asked to show that the cross-slit image is built by the same straightedge moves as any descriptive-geometry projection, with two centres instead of one.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Double-slit-project/35%20tetra%20drafting%20board.html" title="Sheet 35 — the tetra drafting board, cross-slit construction" height="660" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Sheet 35 · the drafting board</span><a href="https://flyingsticks.github.io/Double-slit-project/35%20tetra%20drafting%20board.html">Open full page →</a></div>
+    <figcaption class="cap">Plan, side and front of the cross-slit construction. Trace a point, sweep an edge, switch on the pinhole to see the two slits collapse to one station point and the bow straighten. The board keeps its own colours — Z<sub>v</sub> red, Z<sub>h</sub> blue.</figcaption>
+  </figure>
+
+  <h2><span class="sn">1.3&nbsp;·</span> The same board, read as glide</h2>
+  <p>Sheet 35·G keeps the armature and changes the graduation. The depth between the front face and the shared back wall is divided into sixteen measured levels, and both readings are pinned to agree at level&nbsp;0 (true size) and level&nbsp;16. In between, the glide runs its depth lines straight and its levels in equal steps, while the cross-slit bows its lines and crowds its levels by foreshortening; the <button class="term" data-t="harmonic">harmonic</button> chip shows where the glide's equal marks fall in harmonic progression along the cross-slit's ray, with the depth plane at infinity landing on the flat segment through the horizontal vanishing points. Toggle between the two readings with the box fixed and the whole book is in front of you: one drawn skeleton, two rulers laid along it.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Lumped-together/35g-tetra-drafting-board-glide.html" title="Sheet 35·G — the drafting board read as glide, with measured depth levels" height="660" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Sheet 35·G · measuring depth levels</span><a href="https://flyingsticks.github.io/Lumped-together/35g-tetra-drafting-board-glide.html">Open full page →</a></div>
+    <figcaption class="cap">The glide companion board. Glide and cross-slit toggle over one armature; sixteen depth levels, agreeing at 0 and 16; the harmonic chip marks the progression. Note the board opens with its own Z<sub>v</sub> (103), not the rig's 150 — set it to 150 to match the other figures. 17 smoke checks run against this page.</figcaption>
+  </figure>
+
+  <h2><span class="sn">1.4&nbsp;·</span> The inversion</h2>
+  <p>Are parallel rays capturing a converging shape, or converging rays capturing a rectilinear one? Both — and choosing is the organizing move of the whole family. A projection is a congruence given a role. The drawn <button class="term" data-t="armature">armature</button> is the shadow of the congruence and is shared by both readings; only the graduations differ. The inversion sheet puts the choice on a marker: drag it about the <button class="term" data-t="ratesquare">rate square</button> and the two pictures — glide on the right, cross-slit on the left — agree or split as the congruence degenerates or does not.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Glide_projection/the-inversion-v1.html" title="The inversion — one congruence, two roles" height="700" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>The inversion · v1</span><a href="https://flyingsticks.github.io/Glide_projection/the-inversion-v1.html">Open full page →</a></div>
+    <figcaption class="cap">Left and right are the two readings on a shared camera; the middle square chooses the congruence. At the corners the readings fuse; off them one armature splits into a dual pair. The table beneath places every construction in the family under the inversion, and every sheet of the archive on it.</figcaption>
+  </figure>
+  <p>The sheet records the fact this book is named for, and its two levels. The <em>drawn lines</em> agree wherever the congruence degenerates: the whole diagonal (pencils), the r&nbsp;=&nbsp;0 edges (a slit at infinity), and the corners. The <em>full maps</em> — lines, graduation and fibres together — agree only at the corners: perspective, orthographic, the two <button class="term" data-t="pushbroom">pushbrooms</button>. Between those two levels is the whole drama: one congruence, worn two ways, drawing the same lines and measuring them differently. Chapter&nbsp;2 says what a reading is; Chapter&nbsp;3 measures the gap between the two levels and finds it is one cubic.</p>
+
+  <section class="companions">
+    <h2>Companions to this chapter</h2>
+    <ul>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-inversion-viewer-v2.html">The inversion viewer</a> — drop any .obj and see it worn both ways, with live split checks</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/glide-vs-crossslit.html">Glide vs cross-slit</a> — both constructions on one figure, slit separation live</li>
+      <li><a href="https://flyingsticks.github.io/Lumped-together/The-glide-atlas-v2.html">The glide atlas</a> — the whole family on the rate square; and <a href="https://flyingsticks.github.io/Glide_projection/the-congruence-map.html">the congruence map</a>, the reference plate, anticipating Chapter&nbsp;8</li>
+      <li><a href="https://flyingsticks.github.io/Tetra_engine_complete/11_tetra_3D_gridded_glide_cube.html">Demo 11</a>, <a href="https://flyingsticks.github.io/Tetra_engine_complete/12_tetra_3D_gridded_xSlit_cube.html">demo 12</a>, <a href="https://flyingsticks.github.io/Tetra_engine_complete/13_tetra_3D_gridded_xSlit_color.html">demo 13</a> — the gridded room under each reading: straight tracks, then bowed</li>
+      <li><a href="https://flyingsticks.github.io/Double-slit-project/28%20tetra%20bowing.html">The Bowing Theorem</a> — straight edges image as Möbius graphs; flatten D<sub>z</sub> and they straighten</li>
+      <li><a href="https://flyingsticks.github.io/Tetra_engine_complete/6_tetra_optical_hole.html">Demo 6</a> — the image through the hole</li>
+    </ul>
+    <p class="checks"><strong>This chapter checks:</strong> check_inversion.js 10/10 (factorization glide&nbsp;=&nbsp;Ortho&nbsp;∘&nbsp;Relief, the shadow identity, the straightness swap, the fixed points, the two agreement levels) · check_transposition.js · splitDevMesh (viewer, re-run on every drag) · smoke_glide_board.js 17/17 (35·G) · Bowing Theorem Möbius-fit residual ~1e-13 (sheet 28).</p>
+  </section>
+
+  <nav class="chnav" aria-label="Chapter navigation">
+    <a href="index.html"><span class="dir">← Contents</span>One Congruence, Two Readings</a>
+    <span class="off" style="text-align:right;"><span class="dir">Next →</span>Chapter 2 · Law and gauge<br><small>in preparation</small></span>
+  </nav>
+</main>
+
+<div id="gloss-card" hidden role="dialog" aria-label="Glossary definition">
+  <button class="close" aria-label="Close definition">×</button>
+  <span id="gloss-body"></span>
+  <a class="more" href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">Full glossary →</a>
+</div>
+
+<script>
+(function(){
+  var defs = {
+    congruence: "<b>Line congruence.</b> A two-parameter family of lines: through a general point of space passes one line of the family, and in a general plane lies one. The two-slit congruence is the set of transversals of two skew slit lines. The only object in the book.",
+    pinhole: "<b>Pinhole.</b> The degenerate congruence in which both slits sit at one depth: every line passes through one centre, and the two readings coincide as maps. Classical perspective.",
+    slit: "<b>Slit.</b> A line in a depth plane that every ray of the congruence must meet. The rig has a vertical slit at Z<sub>v</sub> = 150 (crimson) and a horizontal slit at Z<sub>h</sub> = 250 (purple); each magnifies its own axis by the perspective factor for its own depth.",
+    reading: "<b>Reading.</b> A congruence given a role — a rule for what the lines are (edges or rays) together with a graduation laid along them. Chapter 2 makes this exact: a law plus a gauge.",
+    glide: "<b>Glide.</b> The 1984 drawing construction: the congruence read as edges under parallel light, depth lines straight, graduated in equal steps (the Reach gauge). Drawn teal.",
+    crossslit: "<b>Cross-slit.</b> The optical construction: the congruence read as rays through two slits at two depths, graduated by foreshortening (the Turn gauge). Depth lines bow. Drawn purple.",
+    armature: "<b>Armature.</b> The drawn incidence skeleton — the shadow of the congruence on the sheet. Shared by both readings; only the graduation along it differs.",
+    ratesquare: "<b>Rate square.</b> The space of readings: a point (r<sub>u</sub>, r<sub>v</sub>) gives the linear contraction rate of each channel. Optical constructions sit on the corners and edges; glide constructions fill the interior.",
+    pushbroom: "<b>Pushbroom.</b> The congruence with one slit at a finite depth and the other at infinity — a corner of the rate square, (1,0) or (0,1). Fused under both readings.",
+    harmonic: "<b>Harmonic.</b> Four collinear points with cross-ratio −1. On 35·G the glide's equal depth marks fall in harmonic progression along the cross-slit's ray; Chapter 3 makes this the arithmetic of the seam."
+  };
+  var card = document.getElementById('gloss-card'),
+      body = document.getElementById('gloss-body'),
+      open = null;
+  function hide(){ card.hidden = true; if(open){ open.setAttribute('aria-expanded','false'); open = null; } }
+  document.querySelectorAll('button.term').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', function(){
+      if(open === b){ hide(); return; }
+      hide();
+      body.innerHTML = defs[b.dataset.t] || '';
+      card.hidden = false; open = b; b.setAttribute('aria-expanded','true');
+    });
+  });
+  card.querySelector('.close').addEventListener('click', hide);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+})();
+</script>
+</body>
+</html>

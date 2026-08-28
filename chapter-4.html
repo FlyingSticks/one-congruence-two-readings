@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 4 · The group — One Congruence, Two Readings</title>
+<style>
+  :root {
+    --cream:#faf6ef; --plum:#43203f; --purple:#6a2c91; --crimson:#c0322b;
+    --gold:#b08948; --teal:#177f75; --ink:#2b2226; --grey:#6b6360; --rule:#e2d9c8;
+  }
+  html { background: var(--cream); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; color: var(--ink); background: var(--cream);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem;
+  }
+  .eyebrow a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+  h1 { font-size: 2.4rem; line-height: 1.08; margin: 0 0 .35rem; color: var(--plum); font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-style: italic; font-size: 1.18rem; color: var(--purple); margin: 0 0 1.8rem; line-height: 1.4; }
+  h2 { font-size: 1.4rem; color: var(--plum); margin: 2.6rem 0 .9rem; line-height: 1.25; }
+  h2 .sn { color: var(--gold); font-weight: 400; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--purple); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  a:hover, a:focus-visible { color: var(--crimson); border-bottom-style: solid; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  em { color: inherit; }
+
+  /* Theorem box */
+  .thm { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; }
+  .thm .label { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .thm p { margin-bottom: .5rem; }
+  .thm ol { margin: .2rem 0 .4rem 1.2rem; padding: 0; }
+  .thm li { margin-bottom: .25rem; }
+
+  table.six { border-collapse: collapse; width: 100%; font-size: .9rem; margin: 1rem 0 1.4rem; }
+  table.six th, table.six td { text-align: left; padding: .35rem .5rem .35rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  table.six th { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  table.six td:first-child { color: var(--plum); font-weight: 700; white-space: nowrap; }
+
+  /* Instrument embeds */
+  figure.inst { margin: 1.6rem 0 2rem; }
+  .inst-frame { border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: #fff; }
+  .inst iframe { display: block; width: 100%; border: 0; }
+  .inst-bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
+    padding: .45rem .1rem 0;
+  }
+  .inst-bar a { color: var(--purple); letter-spacing: .12em; }
+  figcaption.cap { font-size: .88rem; color: var(--grey); line-height: 1.5; padding: .5rem .1rem 0; text-transform: none; letter-spacing: 0; font-family: Georgia, serif; }
+
+  /* Glossary terms */
+  button.term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    border-bottom: 1px dotted var(--teal);
+  }
+  button.term[aria-expanded="true"] { color: var(--teal); border-bottom-style: solid; }
+  #gloss-card {
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem)); background: #fffdf8; color: var(--ink);
+    border: 1px solid var(--gold); border-radius: 4px; box-shadow: 0 6px 24px rgba(43,34,38,.18);
+    padding: .9rem 1.1rem; font-size: .95rem; line-height: 1.55; z-index: 50;
+  }
+  #gloss-card[hidden] { display: none; }
+  #gloss-card b { color: var(--plum); }
+  #gloss-card .close { float: right; margin-left: .8rem; border-bottom: none; font-size: 1.1rem; line-height: 1; background:none; border:none; color: var(--grey); cursor: pointer; }
+  #gloss-card .more { display: block; margin-top: .4rem; font-size: .85rem; }
+
+  /* Companions + checks */
+  .companions { border-top: 1px solid var(--gold); margin-top: 3rem; padding-top: 1rem; }
+  .companions h2 { margin-top: 0; font-size: 1.05rem; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .companions ul { margin: 0; padding: 0 0 0 1.1rem; font-size: .95rem; line-height: 1.7; }
+  .checks { font-size: .88rem; color: var(--grey); border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; line-height: 1.6; }
+
+  /* Chapter nav */
+  nav.chnav { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--gold);
+    margin-top: 2.2rem; padding-top: 1rem; font-size: .95rem; }
+  nav.chnav .dir { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; }
+  nav.chnav .off { color: var(--grey); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow"><a href="index.html">One Congruence, Two Readings</a> · Chapter 4</p>
+    <h1>The group</h1>
+    <p class="sub">Six numbers, not one — the involutions, the 3-cycle, and one S₃ per channel colliding on the seam</p>
+  </header>
+
+  <p>A cross-ratio is one number attached to four points only after an ordering is chosen. Reorder them and the number runs through six values, λ, 1−λ, 1/λ, 1/(1−λ), λ/(λ−1), (λ−1)/λ, permuted by the <button class="term" data-t="anharmonic">anharmonic group</button> S₃. Chapter&nbsp;2 met two of those maps as the involutions of the two registers, the Complement and the Reciprocal, and found their still points were the six special values. This chapter names all six, shows that every one of them is a quantity the drafting board already computes, and then does the thing the book is for: it puts one copy of the group on each channel of the two-slit rig and asks where the two copies agree. The answer is the seam again, and only at harmonic position on it.</p>
+
+  <div class="thm">
+    <span class="label">The gauge is the group</span>
+    <p><b>Theorem.</b> The six named quantities of the board — the mark, the gauge product, the armature coupling, the glide factor, the directing gauge and its return — are the six elements of S₃ acting on one parameter λ. On normalized depth ζ&nbsp;=&nbsp;z/Z<sub>p</sub>, the board's foreshortening w(z)&nbsp;=&nbsp;Z<sub>p</sub>/(Z<sub>p</sub>−z) is exactly the 3-cycle ω and its inverse z(w) is exactly ω²; ω³&nbsp;=&nbsp;identity.</p>
+    <p><b>Observation.</b> ω's orbit {0,&nbsp;1,&nbsp;∞} is {picture plane, station point, plane at infinity}: the 3-cycle rotates the three fundamental planes of the perspective apparatus into one another.</p>
+    <p style="font-size:.88rem;color:var(--grey);margin-bottom:0;"><b>Struck</b> from the ledger: "the board independently discovers S₃." It cannot — τ∘σ&nbsp;=&nbsp;ω identically, so once two involutions act on one parameter the 3-cycles exist by force. Their presence is not evidence; only the meaning of the orbit is.</p>
+  </div>
+
+  <h2><span class="sn">4.1&nbsp;·</span> All six, named</h2>
+  <p>The three <button class="term" data-t="involution">involutions</button> are drawn as symmetric arcs to a partner, each with its pair of still points. The two <button class="term" data-t="threecycle">3-cycles</button> cannot be drawn that way — they have no partner and no real still point — so they get directed arrows and their own orbit figure. That difference in drawing is the content. The Reciprocal is the camera factor, the gauge product λ·ρ&nbsp;=&nbsp;1 of Chapter&nbsp;3's VM·VI&nbsp;=&nbsp;VP². The Third, λ&nbsp;↦&nbsp;λ/(λ−1), is the armature coupling, 1/λ&nbsp;+&nbsp;1/σ&nbsp;=&nbsp;1 — and the single element that swaps the two slit feet once the surface is pinned at 0, the pairing switch of Chapter&nbsp;2. The Complement is the glide factor. And ω&nbsp;=&nbsp;1/(1−λ) is the <button class="term" data-t="directing">directing gauge</button> g<sub>D</sub>, the same 1/(1−k) that seats the directing axis on the six core armatures: depth into foreshortening, with ω² the return.</p>
+  <table class="six">
+    <tr><th>map</th><th>on the board</th><th>fixes</th></tr>
+    <tr><td>λ</td><td>the mark, the dial</td><td>all</td></tr>
+    <tr><td>ρ&nbsp;=&nbsp;1/λ</td><td>camera factor · gauge product λ·ρ&nbsp;=&nbsp;1</td><td>±1</td></tr>
+    <tr><td>σ&nbsp;=&nbsp;λ/(λ−1)</td><td>armature coupling 1/λ&nbsp;+&nbsp;1/σ&nbsp;=&nbsp;1 · depth ζ</td><td>0,&nbsp;2</td></tr>
+    <tr><td>τ&nbsp;=&nbsp;1−λ</td><td>glide factor · foreshortening w</td><td>½,&nbsp;∞</td></tr>
+    <tr><td>ω&nbsp;=&nbsp;1/(1−λ)</td><td>directing gauge g<sub>D</sub> · depth&nbsp;→&nbsp;foreshortening</td><td>none real</td></tr>
+    <tr><td>ω²&nbsp;=&nbsp;(λ−1)/λ</td><td>the return · foreshortening&nbsp;→&nbsp;depth</td><td>none real</td></tr>
+  </table>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="the-gauge-is-the-group-v2.html" title="The gauge is the group — all six anharmonic maps as board quantities" height="720" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>The gauge is the group · all six · v2</span><a href="the-gauge-is-the-group-v2.html">Open full page →</a></div>
+    <figcaption class="cap">Drag the line to move λ. Plain arcs are involutions, arrowed arcs the 3-cycles; the triangle beneath shows ω cycling picture plane → station → plane at infinity, never resting, and the complex inset the only place it stops — e<sup>±iπ/3</sup>, off the board. The ledger re-checks λ·ρ&nbsp;=&nbsp;1, the coupling, ω³&nbsp;=&nbsp;id and τ∘σ&nbsp;=&nbsp;ω live.</figcaption>
+  </figure>
+  <p>The two figures are doing opposite jobs. The triangle shows what the 3-cycle does — it moves, always, cycling the three planes every perspective construction is built on. The inset shows the only place it stops, and that place is not on the board. Those are one statement: the rotation of picture plane, station and infinity has no real fixed configuration, which is also why the camera conjugate and the armature conjugate — the orange and teal images of the v1 sheet — never meet at any real depth. The involutions gave the six special values as still points; the 3-cycles give the apparatus itself as an orbit.</p>
+
+  <h2><span class="sn">4.2&nbsp;·</span> Where the orbit shrinks</h2>
+  <p>The generic orbit has six values. It collapses only where λ has a stabiliser, and <button class="term" data-t="orbstab">orbit times stabiliser is pinned at six</button>, so fewer images always means more symmetry holding λ still, never the reverse. Over the reals there are exactly two ways this happens. The <button class="term" data-t="harmonicorbit">harmonic orbit</button> {−1,&nbsp;½,&nbsp;2}: three values, each fixed by a different involution. The <button class="term" data-t="degenerate">degenerate orbit</button> {0,&nbsp;1,&nbsp;∞}: the same count, the other triple. The third collapse, six to two, needs the 3-cycle to stand still, λ²&nbsp;−&nbsp;λ&nbsp;+&nbsp;1&nbsp;=&nbsp;0, and that quadratic has discriminant −3 and real minimum ¾: the <button class="term" data-t="equianharmonic">equianharmonic</button> stratum is empty on the real line and lives at ±60° on the unit circle. The complete invariant of an orbit is <button class="term" data-t="jinv">j(λ)</button>&nbsp;=&nbsp;256(λ²−λ+1)³/(λ²(λ−1)²): 1728 on the harmonic orbit, 0 at the equianharmonic poles, ∞ on the degenerate triple.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Overflow/the-equianharmonic-collapse_v2.html" title="The equianharmonic collapse — six into two, off the line" height="720" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>The equianharmonic collapse · v2</span><a href="https://flyingsticks.github.io/Overflow/the-equianharmonic-collapse_v2.html">Open full page →</a></div>
+    <figcaption class="cap">One point, six images, each tinted by the map that made it. Snap to harmonic and the six pile into three; snap to equianharmonic and they pile into two — the three rotations at +60°, the three involutions at −60° — but only after λ has left the line. The stabiliser that does it is the rotation itself.</figcaption>
+  </figure>
+
+  <h2><span class="sn">4.3&nbsp;·</span> One copy per channel</h2>
+  <p>In double-slit geometry the invariant of four rays is not one number but a pair, ⟦r₁,&nbsp;r₂;&nbsp;r₃,&nbsp;r₄⟧&nbsp;=&nbsp;(λ,&nbsp;μ) — one cross-ratio per slit, a single cross-ratio valued in ℝ&nbsp;⊕&nbsp;ℝ. Reordering the rays reorders both foot-quadruples at once, so S₃ acts <button class="term" data-t="diagonal">diagonally</button>, σ·(λ,&nbsp;μ)&nbsp;=&nbsp;(σλ,&nbsp;σμ), and the orbit of a pair has size 6/|Stab(λ)&nbsp;∩&nbsp;Stab(μ)|. The intersection is the whole story.</p>
+  <div class="thm">
+    <span class="label">Orbit collapse is a chain phenomenon</span>
+    <p>For a non-degenerate pair (λ,&nbsp;μ) over ℝ&nbsp;⊕&nbsp;ℝ, the diagonal orbit has size 6 unless λ&nbsp;=&nbsp;μ&nbsp;∈&nbsp;{−1,&nbsp;2,&nbsp;½}, where it has size 3. The classical six-to-three collapse survives in double-slit geometry only on the real diagonal — only for quadruples that are the image of one straight line — and only at harmonic position on that line.</p>
+    <p style="font-size:.88rem;color:var(--grey);margin-bottom:0;">A9; verified to machine precision in check_orbitcollapse.js, with two negative controls.</p>
+  </div>
+  <p>The reason is the one just given: each harmonic value is fixed by a <em>different</em> involution, so two harmonic coordinates share a stabiliser only when they are the same value. The two configurations one would expect to collapse, and which do not, are the negative controls. A split-harmonic quadruple (λ&nbsp;=&nbsp;−1, μ generic) keeps a full six-element orbit. So does a mismatched bi-harmonic one (λ&nbsp;=&nbsp;−1, μ&nbsp;=&nbsp;2 — harmonic on both slits, by different involutions): six again. Only the <button class="term" data-t="cochain">co-chained</button> harmonic quadruple collapses — four scene points on one line, the fourth at the harmonic conjugate — to exactly three pairs, {(−1,−1),&nbsp;(2,2),&nbsp;(½,½)}. So the stratification carries an orbit count: split-harmonic and mismatched bi-harmonic are six-fold strata that merely contain harmonic values, and membership in the collapsed stratum certifies harmonicity and co-chaining at once. The pair of j-invariants is a diagonal invariant but not a complete one — (λ,&nbsp;λ) and (λ,&nbsp;1/λ) have identical j-pairs and lie in different orbits — and what the j-pair forgets is exactly the skew defect: the orbit remembers chain membership.</p>
+  <p>The collapse the double slit cannot have follows at once. λ²&nbsp;−&nbsp;λ&nbsp;+&nbsp;1&nbsp;=&nbsp;0 would have to hold in each component separately, and it holds in neither. Of the Benz trinity the equianharmonic collapse belongs to the elliptic member, ℂ, where the Overflow studies stage it; the split member can be harmonic but never equianharmonic. Six to three is the deepest collapse this geometry admits, and it is reserved for chains.</p>
+  <p>And the rig points at that stratum. On the ray through a scene point, the four canonical points sit in harmonic position, (F₁,&nbsp;F₂;&nbsp;S,&nbsp;P)&nbsp;=&nbsp;−1, exactly when z&nbsp;=&nbsp;2Z<sub>v</sub>Z<sub>h</sub>/(Z<sub>v</sub>+Z<sub>h</sub>)&nbsp;=&nbsp;187.5 — the neutral surface of Chapter&nbsp;3, recovered blind by root-finding in the check. There the two magnifications have equal magnitude and opposite parity, AR(z*)&nbsp;=&nbsp;−1, so the six reorderings of the canonical quadruple give three readings at z* and six everywhere else. One invariant, three appearances: the orbit collapse of the reordering group, the parity balance of the magnifications, and the fusion depth of the doubled camera in Chapter&nbsp;6 are a single harmonic fact read in three charts.</p>
+
+  <h2><span class="sn">4.4&nbsp;·</span> Why these values and no others</h2>
+  <p>The six special values, the two real collapses and the one complex one are not a coincidence of the board. Promote the six maps from verbs to nouns and one new verb appears, composition; climb to the symmetries of that and the tower stops growing — S₃ is its own automorphism group, the ceiling. And the whole story has one root at the top: the modular group is ℤ/2&nbsp;∗&nbsp;ℤ/3, carrying rotations of order 2 and 3 and no others, whose fixed points i and ρ are the only special points there are, and the fixed-point equation of the order-3 one is τ²&nbsp;−&nbsp;τ&nbsp;+&nbsp;1&nbsp;=&nbsp;0 — the equianharmonic polynomial itself. The companions climb that tower by hand; the book needs only the floor it stands on, where the two channels' copies of the group collide on the seam.</p>
+
+  <section class="companions">
+    <h2>Companions to this chapter</h2>
+    <ul>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-gauge-is-the-group-v1.html">The gauge is the group</a> (v1) — three constructions, three involutions; the reciprocal and coupling images meeting only where λ²−λ+1&nbsp;=&nbsp;0</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-channel-rates-v1.html">The channel rates</a>, <a href="https://flyingsticks.github.io/Glide_projection/six-core-armatures-v1.html">the six core armatures</a> (sheet 39, the 1984 plate p.&nbsp;93 run through one gauge), <a href="https://flyingsticks.github.io/Glide_projection/merges-and-depths-3d-v1.html">merges and depths in space</a></li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/pencil-dial-v1.html">The pencil dial</a> — which cube images carry a harmonic depth pencil; the Chasles loci</li>
+      <li><a href="https://flyingsticks.github.io/Overflow/Lambda_sphere_2.html">The λ-sphere</a> — the six special values as a hexagon on the equator, the equianharmonic pair at the poles</li>
+      <li><a href="https://flyingsticks.github.io/Overflow/shared-discriminant.html">The shared discriminant</a> — τ²−4 read once as a conic, once as a Möbius map</li>
+      <li><a href="https://flyingsticks.github.io/Overflow/the-ceiling-of-the-tower.html">The ceiling of the tower</a> and <a href="https://flyingsticks.github.io/Overflow/modular-corner.html">the modular corner</a> — the group acting on itself; why 2 and 3</li>
+      <li><a href="https://flyingsticks.github.io/Overflow/anharmonic-six_2.html">The sign, the horizon, and the anharmonic six</a> — the ladder of vanishing points, with −1 as the half-turn</li>
+      <li><a href="https://flyingsticks.github.io/Double-slit-project/A9%20orbit%20collapse.pdf">A9 · Orbit collapse</a> — the addendum §4.3 is drawn from</li>
+    </ul>
+    <p class="checks"><strong>This chapter checks:</strong> the-gauge-is-the-group v2 ledger, live on every drag (w(z)/z(w) reproduce the shipped tick labels w&nbsp;=&nbsp;0.75&nbsp;→&nbsp;z&nbsp;=&nbsp;−100, 0.5&nbsp;→&nbsp;−300, 0.25&nbsp;→&nbsp;−900; ω³&nbsp;=&nbsp;id; ω(e<sup>iπ/3</sup>)&nbsp;=&nbsp;e<sup>iπ/3</sup>) · check_orbitcollapse.js (group closure exact; j constant to rel&nbsp;10⁻¹⁵, j(−1)&nbsp;=&nbsp;1728; co-chained orbit 3, split-harmonic and mismatched bi-harmonic 6; z*&nbsp;=&nbsp;187.5 recovered to nine decimals; AR(z*)&nbsp;=&nbsp;−1 by formula and by projection).</p>
+  </section>
+
+  <nav class="chnav" aria-label="Chapter navigation">
+    <a href="chapter-3.html"><span class="dir">← Previous</span>Chapter 3 · The seam</a>
+    <a href="index.html" style="align-self:center;">Contents</a>
+    <span class="off" style="text-align:right;"><span class="dir">Next →</span>Chapter 5 · Duality<br><small>in preparation</small></span>
+  </nav>
+</main>
+
+<div id="gloss-card" hidden role="dialog" aria-label="Glossary definition">
+  <button class="close" aria-label="Close definition">×</button>
+  <span id="gloss-body"></span>
+  <a class="more" href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">Full glossary →</a>
+</div>
+
+<script>
+(function(){
+  var defs = {
+    anharmonic: "<b>Anharmonic group.</b> The six Möbius maps that permute a cross-ratio under reordering of its four points — λ, 1−λ, 1/λ, 1/(1−λ), λ/(λ−1), (λ−1)/λ — isomorphic to S₃. Reordering acts through S₄; the Klein four-group acts trivially.",
+    involution: "<b>Involution.</b> A map that is its own inverse. S₃ has three: the Reciprocal 1/λ, the Complement 1−λ, and the Third λ/(λ−1). Each fixes one harmonic value and one degenerate one.",
+    threecycle: "<b>3-cycle.</b> ω = 1/(1−λ) and ω² = (λ−1)/λ, with ω³ = identity. No partner, no real still point; fixed only at e<sup>±iπ/3</sup>. τ∘σ = ω, so two involutions on one parameter force the 3-cycles to exist.",
+    directing: "<b>Directing gauge g<sub>D</sub>.</b> The board's 1/(1−k), which seats the directing axis on the six core armatures. It is the 3-cycle ω: on normalized depth it carries picture plane → station → plane at infinity → back.",
+    orbstab: "<b>Orbit–stabiliser.</b> |orbit| × |stabiliser| = 6 for every λ. Generic 6 × 1; harmonic 3 × 2; degenerate 3 × 2; equianharmonic 2 × 3 — the four ways six factors.",
+    harmonicorbit: "<b>Harmonic orbit.</b> {−1, ½, 2}: cross-ratio −1 and its two reorderings. Each value is fixed by a different involution (−1 by the Reciprocal, ½ by the Complement, 2 by the Third). j = 1728.",
+    degenerate: "<b>Degenerate orbit.</b> {0, 1, ∞}: two of the four points coincide. Same orbit size as harmonic, the other triple; on the board these are the picture plane, station and plane at infinity. j = ∞.",
+    equianharmonic: "<b>Equianharmonic.</b> λ² − λ + 1 = 0, λ = e<sup>±iπ/3</sup>: the orbit shrinks to two, fixed by the 3-cycle. Empty over the reals (discriminant −3, real minimum ¾). j = 0.",
+    jinv: "<b>j-invariant.</b> j(λ) = 256(λ²−λ+1)³/(λ²(λ−1)²), the complete invariant of a single orbit: 1728 harmonic, 0 equianharmonic, ∞ degenerate. For a pair (λ, μ) the j-pair is invariant but not complete.",
+    diagonal: "<b>Diagonal action.</b> One reordering of the four rays reorders both slit foot-quadruples at once: σ·(λ, μ) = (σλ, σμ). The orbit of the pair has size 6/|Stab(λ) ∩ Stab(μ)|.",
+    cochain: "<b>Co-chained.</b> Four scene points lying on one straight line, so that both slits see the same cross-ratio, λ = μ. The only quadruples on which the six-to-three collapse survives in double-slit geometry — and only at harmonic position."
+  };
+  var card = document.getElementById('gloss-card'),
+      body = document.getElementById('gloss-body'),
+      open = null;
+  function hide(){ card.hidden = true; if(open){ open.setAttribute('aria-expanded','false'); open = null; } }
+  document.querySelectorAll('button.term').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', function(){
+      if(open === b){ hide(); return; }
+      hide();
+      body.innerHTML = defs[b.dataset.t] || '';
+      card.hidden = false; open = b; b.setAttribute('aria-expanded','true');
+    });
+  });
+  card.querySelector('.close').addEventListener('click', hide);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+})();
+</script>
+</body>
+</html>

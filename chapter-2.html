@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 2 · Law and gauge — One Congruence, Two Readings</title>
+<style>
+  :root {
+    --cream:#faf6ef; --plum:#43203f; --purple:#6a2c91; --crimson:#c0322b;
+    --gold:#b08948; --teal:#177f75; --ink:#2b2226; --grey:#6b6360; --rule:#e2d9c8;
+  }
+  html { background: var(--cream); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; color: var(--ink); background: var(--cream);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem;
+  }
+  .eyebrow a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+  h1 { font-size: 2.4rem; line-height: 1.08; margin: 0 0 .35rem; color: var(--plum); font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-style: italic; font-size: 1.18rem; color: var(--purple); margin: 0 0 1.8rem; line-height: 1.4; }
+  h2 { font-size: 1.4rem; color: var(--plum); margin: 2.6rem 0 .9rem; line-height: 1.25; }
+  h2 .sn { color: var(--gold); font-weight: 400; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--purple); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  a:hover, a:focus-visible { color: var(--crimson); border-bottom-style: solid; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  em { color: inherit; }
+
+  /* Theorem box */
+  .thm { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; }
+  .thm .label { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .thm p { margin-bottom: .5rem; }
+  .thm ol { margin: .2rem 0 .4rem 1.2rem; padding: 0; }
+  .thm li { margin-bottom: .25rem; }
+
+  /* Instrument embeds */
+  figure.inst { margin: 1.6rem 0 2rem; }
+  .inst-frame { border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: #fff; }
+  .inst iframe { display: block; width: 100%; border: 0; }
+  .inst-bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
+    padding: .45rem .1rem 0;
+  }
+  .inst-bar a { color: var(--purple); letter-spacing: .12em; }
+  figcaption.cap { font-size: .88rem; color: var(--grey); line-height: 1.5; padding: .5rem .1rem 0; text-transform: none; letter-spacing: 0; font-family: Georgia, serif; }
+
+  /* Glossary terms */
+  button.term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    border-bottom: 1px dotted var(--teal);
+  }
+  button.term[aria-expanded="true"] { color: var(--teal); border-bottom-style: solid; }
+  #gloss-card {
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem)); background: #fffdf8; color: var(--ink);
+    border: 1px solid var(--gold); border-radius: 4px; box-shadow: 0 6px 24px rgba(43,34,38,.18);
+    padding: .9rem 1.1rem; font-size: .95rem; line-height: 1.55; z-index: 50;
+  }
+  #gloss-card[hidden] { display: none; }
+  #gloss-card b { color: var(--plum); }
+  #gloss-card .close { float: right; margin-left: .8rem; border-bottom: none; font-size: 1.1rem; line-height: 1; background:none; border:none; color: var(--grey); cursor: pointer; }
+  #gloss-card .more { display: block; margin-top: .4rem; font-size: .85rem; }
+
+  /* Companions + checks */
+  .companions { border-top: 1px solid var(--gold); margin-top: 3rem; padding-top: 1rem; }
+  .companions h2 { margin-top: 0; font-size: 1.05rem; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .companions ul { margin: 0; padding: 0 0 0 1.1rem; font-size: .95rem; line-height: 1.7; }
+  .checks { font-size: .88rem; color: var(--grey); border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; line-height: 1.6; }
+
+  /* Chapter nav */
+  nav.chnav { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--gold);
+    margin-top: 2.2rem; padding-top: 1rem; font-size: .95rem; }
+  nav.chnav .dir { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; }
+  nav.chnav .off { color: var(--grey); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow"><a href="index.html">One Congruence, Two Readings</a> · Chapter 2</p>
+    <h1>Law and gauge</h1>
+    <p class="sub">What a reading is — a law plus a graduation — and why no line carries both graduations at once</p>
+  </header>
+
+  <p>Chapter&nbsp;1 left two readings on one set of lines and said only that they graduate the lines differently. This chapter says what a <button class="term" data-t="reading">reading</button> is. Two things had been hiding under the one word: the <button class="term" data-t="law">armature law</button> — the shape of the image machinery, each channel contracting toward its seat at its own rate, straight depth lines, a rate pair, the vanishing structure — and the <button class="term" data-t="gauge">depth gauge</button>, the scale laid along those lines. A reading is a law together with a class of gauges, and a <button class="term" data-t="calibration">calibration</button> picks the representative. So there is no single object called the glide: glide names the law, and the gauge remains to be chosen. The cross-slit is the same kind of law with no choice left — optics weld law and gauge together. That one difference, free against welded, is the whole content of "one is a tool, the other is physics," and the theorem beneath it is small enough to state in a sentence.</p>
+
+  <div class="thm">
+    <span class="label">Theorem 0</span>
+    <p>A scale on a straight line cannot both mark equal steps and assign infinity a finite mark. A scale with equal steps is affine, and an affine map of the line sends ∞ to ∞.</p>
+    <p>The <button class="term" data-t="reach">Reach</button> gauge keeps equal steps and leaves infinity unmarked; the <button class="term" data-t="turn">Turn</button> gauge is a Möbius re-scaling that marks infinity at a finite point and pays for it with harmonic crowding. These are the two graduations. Quantitatively: over equal steps 0, unit, 2·unit, the second difference of the graduation times the finite mark of ∞ is 2(1&nbsp;+&nbsp;d)/(2&nbsp;+&nbsp;d)&nbsp;≥&nbsp;1, d&nbsp;=&nbsp;D/unit. Either failure can be driven to zero — never both.</p>
+    <p style="font-size:.88rem;color:var(--grey);margin-bottom:0;">Proved where stated; the witness inequality verified numerically in the Reach-and-Turn smoke suite, limit 2 at the Reach end.</p>
+  </div>
+
+  <h2><span class="sn">2.1&nbsp;·</span> Reach and Turn</h2>
+  <p>The two gauges are two registers on one line. Reach <em>counts</em>: equal steps mean equal amounts, its move is the slide, which keeps every difference and breaks every ratio, and its one involution is the <button class="term" data-t="complement">Complement</button>, the fold about the midpoint of the unit — the only element of the anharmonic group an affine engine can see. Turn <em>compares</em>: equal steps mean equal ratios, its move is the scale, which keeps every ratio and breaks every difference, and its involution is the <button class="term" data-t="reciprocal">Reciprocal</button>, inside exchanged with outside across the mirror circle. On a line Turn is a Möbius coordinate: ∞ is a marked point, so some finite point — the <button class="term" data-t="station">station</button>, the eye — must be sent to ∞ in its place, and equal steps in depth become the harmonic progression k/(k+1). Reach is the register of the count, the covector, the stack of level planes. Turn is the register of foreshortening, of perspective, of the cross-slit with both feet finite.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Lumped-together/reach-and-turn-v3.html" title="Reach and Turn — the two registers on one line" height="760" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Reach and Turn · v3</span><a href="https://flyingsticks.github.io/Lumped-together/reach-and-turn-v3.html">Open full page →</a></div>
+    <figcaption class="cap">Band 1 the additive register, band 2 the multiplicative; band 3 pulls ∞ in from the end and watches the steps stop being equal, the product of the two failures never dropping below 1; band 4 the two balances in a split rectangle. The six special values {−1,&nbsp;0,&nbsp;½,&nbsp;1,&nbsp;2,&nbsp;∞} are the fixed pairs of the three involutions — Chapter&nbsp;4's group, met here on one line.</figcaption>
+  </figure>
+
+  <h2><span class="sn">2.2&nbsp;·</span> Free and welded</h2>
+  <p>The glide's third pin is the drafter's: a depth line may be counted (Reach) or foreshortened (Turn) at will, and straightness survives every re-gauging because the law is affine in the gauge whatever the gauge is in depth. The cross-slit's third pin is a slit foot, placed by optics: rays through two slits fix both the bowing of the lines and the crowding along them, and no chip can re-graduate what the rig has ruled. What the rate square sorts, then, is not free against welded — that is fixed by the reading wherever you stand. It sorts whether the two <em>laws</em> agree. On the seam they rule the same straight line, and turning the glide's free gauge to Turn welds the readings into one map. Off the seam the camera's line bows away, and no gauge can follow it, because the gauge question never arises once the laws already disagree.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Lumped-together/the-law-and-the-gauge-v1.html" title="The law and the gauge — where the seam lets glide be welded" height="640" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>The law and the gauge · v1</span><a href="https://flyingsticks.github.io/Lumped-together/the-law-and-the-gauge-v1.html">Open full page →</a></div>
+    <figcaption class="cap">Sit on the diagonal: teal line and purple curve are one law; the marks disagree under Reach and land on each other under Turn — the weld. Step off: the curve bows by a unit multiple of Δ and the marks have nowhere to go. On a pushbroom edge one channel is immune. Shrink the slab and the gap closes as its square — the picture plane is the fused locus in depth, as the seam is in (r<sub>u</sub>,&nbsp;r<sub>v</sub>). Convention: glide G(μ)&nbsp;=&nbsp;F&nbsp;+&nbsp;μd, camera C(λ)&nbsp;=&nbsp;(x₀/(1+r<sub>u</sub>λ),&nbsp;y₀/(1+r<sub>v</sub>λ)); the weld to channel c is μ&nbsp;=&nbsp;−λ/(1+r<sub>c</sub>λ), the unique Möbius map putting that channel's marks on the camera. 15 smoke checks.</figcaption>
+  </figure>
+
+  <h2><span class="sn">2.3&nbsp;·</span> One line, three rulers</h2>
+  <p>Take a single line of the congruence in section and lay three rulers along it. Each is a three-<button class="term" data-t="pin">pin</button> coordinate. The cross-slit's pins are the surface point S, where the line pierces the picture plane, and the two slit feet F₁ and F₂ — placed by optics, not chosen. The glide gauges share S and choose the rest: Reach pins ∞ at ∞ and marks equal steps; Turn pins ∞ at 1 and sends the station to ∞, so its steps crowd harmonically. The fourth point on the line is the probe P, the one scene point, and it has no image of its own — every point of the line pierces the picture plane at the same footprint, which is why the probe can slide without the image moving. Because all three rulers are three-pin coordinates on one line, the cross-ratio of any four depths reads the same on every ruler. That is the <button class="term" data-t="invariant">invariant</button>. What differs is where each ruler puts the <button class="term" data-t="planeinf">plane at infinity</button>: Reach sends it off the end; Turn puts it at 1 by fiat; the cross-slit puts it at 1&nbsp;−&nbsp;Z₂/Z₁, wherever the slits happen to be, and the rig has no say.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Lumped-together/invariants-and-gauges-v2.html" title="Invariants and gauges — one line of the congruence, three rulers" height="760" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Invariants and gauges · v2</span><a href="https://flyingsticks.github.io/Lumped-together/invariants-and-gauges-v2.html">Open full page →</a></div>
+    <figcaption class="cap">Five bands: the line physically; the same line under three graduations, with the green diamond marking where each sends the plane at infinity; the names of the pins up to S₃; the depth gauge diag(λI,&nbsp;μI), the kernel — with the surface unpinned, k slides the probe along the ray and the image never moves; and the conversion, calibrated depth ν&nbsp;=&nbsp;z/R with R the geometric mean of the slit depths, transported by ν&nbsp;↦&nbsp;1/ν across channels, product one.</figcaption>
+  </figure>
+  <p>The instrument records the fact that closes the chapter's circle. <em>The two pushbroom limits are the two glide gauges.</em> Send F₂ far out and the ∞-pin walks onto the plane at infinity: the cross-slit ticks straighten into equal steps and the diamond leaves through the end — Reach. Send F₁ far out and the 1-pin walks onto the plane at infinity: the diamond settles at 1, x(z) becomes z/(z&nbsp;+&nbsp;|Z₂|), and the surviving slit is the station — Turn. Fuse the slits and the cross-slit ruler collapses to the pinhole's. So the pairing F₁&nbsp;↔&nbsp;plane at infinity, F₂&nbsp;↔&nbsp;station is not a convention imposed on the rig; it is what the rig itself does in the limit. And once the surface sits at 0, exactly one element of S₃ besides the identity keeps it there, x&nbsp;↦&nbsp;x/(x−1), and it swaps the names of the two feet. That single switch is the whole of the pairing question, and Chapter&nbsp;4 will find it is one of six.</p>
+
+  <h2><span class="sn">2.4&nbsp;·</span> Calibration, and the two balances</h2>
+  <p>The readings meet by calibration: pin them to agree at chosen depth planes. This is not the board's invention but glide practice's own <em>staging</em>, generalized — the staging rectangle of the 1984 plates is the common ground every comparison stands on, and sheet 35·G extends it across the two practices with level&nbsp;0 (the front face, true size) and level&nbsp;16 (the deepest constructed plane) as shared pins. Between the pins the gauges disagree in character, equal spacing against harmonic crowding. Beyond them the vanishing hierarchy opens, and it is strict: 16&nbsp;&lt;&nbsp;h&nbsp;pair&nbsp;&lt;&nbsp;v&nbsp;pair. Under the harmonic gauge it sharpens to theorem: the depth plane at infinity maps to the flat segment h₂·A·h₁ on one vanishing axis, the limit of measured depth, while the v pair lies beyond even that — unreachable at any depth, directional only.</p>
+  <p>The split rectangle sorts the two kinds of truth this leaves. Its multiplicative balance, (ac)(bd)&nbsp;=&nbsp;(ad)(bc), holds for every position of the point: Turn-side truth, an invariant. Its additive balance, ad&nbsp;=&nbsp;bc, closes only on the diagonal: Reach-side truth, a calibration, Euclid&nbsp;I.43. Both practices contain both kinds, but their characteristic truths sort by side — the cross-slit's signature laws are invariants (the cross-ratio readout that never moves, the bowing no slider can repeal), the glide's signature truths are measurements — and the interface between readings is purely Reach-side: shared levels are diagonal closures, true exactly where the construction puts them. The cross-ratio is the balance that never moved. Whether that split-rectangle diagonal <em>is</em> the rate-square diagonal r<sub>u</sub>&nbsp;=&nbsp;r<sub>v</sub> is carried here as check-pending, as the source carries it; Chapter&nbsp;3 states the seam on the rate square in its own terms.</p>
+  <p>Three calibrations were tried on the way to the board, and they are one family. Write X<sub>g</sub> and X<sub>cs</sub> for the two marks of one true measure x. The transpose calibration is the geometric mean, X<sub>g</sub>·X<sub>cs</sub>&nbsp;=&nbsp;x², so inversion through x exchanges the marks; under that inversion the mirrored calibration splits into a conjugate pair, x&nbsp;=&nbsp;AM(X<sub>g</sub>,&nbsp;x²/X<sub>cs</sub>) and x&nbsp;=&nbsp;HM(X<sub>cs</sub>,&nbsp;x²/X<sub>g</sub>). The geometric calibration is the exchanger between the other two, and the measured board completes the family: pin two levels and the gauge between them ranges over the Möbius maps, the equal-step and harmonic scales the two distinguished members. That is the arithmetic Chapter&nbsp;3 finds waiting on the seam.</p>
+
+  <section class="companions">
+    <h2>Companions to this chapter</h2>
+    <ul>
+      <li><a href="the-two-graduations-v2.html">The Two Graduations</a> (<a href="the-two-graduations-v2.pdf">pdf</a>) — the spine this chapter is drawn from: Theorem&nbsp;0, the law/gauge split, the classification of where ∞ lands, the ledger of identities re-run at load</li>
+      <li><a href="https://flyingsticks.github.io/Lumped-together/The-glide-axioms-v4.pdf">The glide axioms &amp; transforms</a> (v4) — four axioms for the edge role, P·D·S·M; the three pins use up the three Möbius freedoms, so λ&nbsp;=&nbsp;k/(k+1) is forced, not chosen. Supersedes <a href="https://flyingsticks.github.io/Glide_projection/the-glide-axioms-v3.html">v3</a>, whose canvas is still live</li>
+      <li><a href="https://flyingsticks.github.io/Lumped-together/The-measured-glide.pdf">Spending the Budget</a> — the design-research paper; the 1984 footing (pp.&nbsp;9–10, 48, 98, 100, 103–122) and the computer-vision rediscovery, 2002–2015</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-channel-rates-v1.html">The channel rates</a> — the graduation of the edge reading, channel by channel</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-directing-organizer-v2.html">The directing organizer</a>, <a href="https://flyingsticks.github.io/Glide_projection/the-split-element-v1.html">the split element</a>, <a href="https://flyingsticks.github.io/Glide_projection/the-type-ab-v1.html">Type A / Type B</a> — constructions inside the edge reading</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-introduction-v2.html">The introduction</a> and <a href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">the glossary</a></li>
+    </ul>
+    <p class="checks"><strong>This chapter checks:</strong> smoke_law_gauge.js 15/15 · smoke reach turn v3.js (Theorem&nbsp;0 witness, limit 2) · The Two Graduations ledger, identities 1–11 re-run over randomized rigs at load · Invariants-and-gauges ledger, live on every drag · check_axioms T1–T5 (v4 pdf).</p>
+  </section>
+
+  <nav class="chnav" aria-label="Chapter navigation">
+    <a href="chapter-1.html"><span class="dir">← Previous</span>Chapter 1 · The congruence</a>
+    <a href="index.html" style="align-self:center;">Contents</a>
+    <a href="chapter-3.html" style="text-align:right;"><span class="dir">Next →</span>Chapter 3 · The seam</a>
+  </nav>
+</main>
+
+<div id="gloss-card" hidden role="dialog" aria-label="Glossary definition">
+  <button class="close" aria-label="Close definition">×</button>
+  <span id="gloss-body"></span>
+  <a class="more" href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">Full glossary →</a>
+</div>
+
+<script>
+(function(){
+  var defs = {
+    reading: "<b>Reading.</b> A law together with a class of gauges. Glide and cross-slit are readings of one congruence, not rival skeletons.",
+    law: "<b>Armature law.</b> The shape of the image machinery: per-channel linear contraction toward a seat at a rate — straight depth lines, a rate pair, the vanishing structure. Summarized by (r<sub>u</sub>, r<sub>v</sub>).",
+    gauge: "<b>Depth gauge.</b> The scale laid along the depth lines: Reach (equal steps, ∞ unmarked) or Turn (Möbius, ∞ at a finite mark) — the two graduations of Theorem 0. Free in the glide, welded in the cross-slit.",
+    calibration: "<b>Calibration.</b> A depth plane at which readings are pinned to agree; selects the gauge's representative. Glide practice's staging, generalized.",
+    reach: "<b>Reach.</b> The additive register: equal steps mean equal amounts; the slide preserves it; ∞ is pinned at ∞; the only involution is the Complement. The count, the covector, the stack of level planes.",
+    turn: "<b>Turn.</b> The multiplicative register: equal steps mean equal ratios; the scale preserves it; ∞ is a marked point, so a station is sent to ∞ in its place; depth steps become the harmonic progression k/(k+1). Foreshortening, perspective, the cross-slit with both feet finite.",
+    complement: "<b>Complement τ.</b> x ↦ 1 − x. Reach's involution, the fold about the midpoint of the unit; fixes ½ and ∞.",
+    reciprocal: "<b>Reciprocal ρ.</b> x ↦ 1/x. Turn's involution, inversion in the mirror circle of radius 1; fixes ±1, exchanges 0 and ∞. With τ it generates the whole anharmonic group.",
+    station: "<b>Station.</b> The point the Turn graduation sends to ∞ — the third pin, and the only one that is not a mark on the drawing. In perspective, the eye. Reach has no station.",
+    pin: "<b>Pin.</b> A distinguished point that fixes one of the three Möbius freedoms of a coordinate on a line. Three pins make a ruler; the cross-slit's are placed by optics, the glide's are chosen.",
+    invariant: "<b>Invariant.</b> What holds at every setting — Turn-side truth. The cross-ratio is the invariant every reading shares: three-pin coordinates on one line all report the same cross-ratio of four depths.",
+    planeinf: "<b>Plane at infinity.</b> The fourth distinguished point of a line. A pin for both glide gauges (Reach sends it to ∞, Turn to 1); a probe for the cross-slit, whose image 1 − Z₂/Z₁ moves with the slits."
+  };
+  var card = document.getElementById('gloss-card'),
+      body = document.getElementById('gloss-body'),
+      open = null;
+  function hide(){ card.hidden = true; if(open){ open.setAttribute('aria-expanded','false'); open = null; } }
+  document.querySelectorAll('button.term').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', function(){
+      if(open === b){ hide(); return; }
+      hide();
+      body.innerHTML = defs[b.dataset.t] || '';
+      card.hidden = false; open = b; b.setAttribute('aria-expanded','true');
+    });
+  });
+  card.querySelector('.close').addEventListener('click', hide);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+})();
+</script>
+</body>
+</html>

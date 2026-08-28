@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 6 · What the two readings buy — One Congruence, Two Readings</title>
+<style>
+  :root {
+    --cream:#faf6ef; --plum:#43203f; --purple:#6a2c91; --crimson:#c0322b;
+    --gold:#b08948; --teal:#177f75; --ink:#2b2226; --grey:#6b6360; --rule:#e2d9c8;
+  }
+  html { background: var(--cream); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; color: var(--ink); background: var(--cream);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem;
+  }
+  .eyebrow a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+  h1 { font-size: 2.4rem; line-height: 1.08; margin: 0 0 .35rem; color: var(--plum); font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-style: italic; font-size: 1.18rem; color: var(--purple); margin: 0 0 1.8rem; line-height: 1.4; }
+  h2 { font-size: 1.4rem; color: var(--plum); margin: 2.6rem 0 .9rem; line-height: 1.25; }
+  h2 .sn { color: var(--gold); font-weight: 400; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--purple); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  a:hover, a:focus-visible { color: var(--crimson); border-bottom-style: solid; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  em { color: inherit; }
+
+  /* Theorem box */
+  .thm { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; }
+  .thm .label { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .thm p { margin-bottom: .5rem; }
+  .thm ol { margin: .2rem 0 .4rem 1.2rem; padding: 0; }
+  .thm li { margin-bottom: .25rem; }
+
+  /* Instrument embeds */
+  figure.inst { margin: 1.6rem 0 2rem; }
+  .inst-frame { border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: #fff; }
+  .inst iframe { display: block; width: 100%; border: 0; }
+  .inst-bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
+    padding: .45rem .1rem 0;
+  }
+  .inst-bar a { color: var(--purple); letter-spacing: .12em; }
+  figcaption.cap { font-size: .88rem; color: var(--grey); line-height: 1.5; padding: .5rem .1rem 0; text-transform: none; letter-spacing: 0; font-family: Georgia, serif; }
+
+  /* Glossary terms */
+  button.term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    border-bottom: 1px dotted var(--teal);
+  }
+  button.term[aria-expanded="true"] { color: var(--teal); border-bottom-style: solid; }
+  #gloss-card {
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem)); background: #fffdf8; color: var(--ink);
+    border: 1px solid var(--gold); border-radius: 4px; box-shadow: 0 6px 24px rgba(43,34,38,.18);
+    padding: .9rem 1.1rem; font-size: .95rem; line-height: 1.55; z-index: 50;
+  }
+  #gloss-card[hidden] { display: none; }
+  #gloss-card b { color: var(--plum); }
+  #gloss-card .close { float: right; margin-left: .8rem; border-bottom: none; font-size: 1.1rem; line-height: 1; background:none; border:none; color: var(--grey); cursor: pointer; }
+  #gloss-card .more { display: block; margin-top: .4rem; font-size: .85rem; }
+
+  /* Companions + checks */
+  .companions { border-top: 1px solid var(--gold); margin-top: 3rem; padding-top: 1rem; }
+  .companions h2 { margin-top: 0; font-size: 1.05rem; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .companions ul { margin: 0; padding: 0 0 0 1.1rem; font-size: .95rem; line-height: 1.7; }
+  .checks { font-size: .88rem; color: var(--grey); border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; line-height: 1.6; }
+
+  /* Chapter nav */
+  nav.chnav { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--gold);
+    margin-top: 2.2rem; padding-top: 1rem; font-size: .95rem; }
+  nav.chnav .dir { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; }
+  nav.chnav .off { color: var(--grey); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow"><a href="index.html">One Congruence, Two Readings</a> · Chapter 6</p>
+    <h1>What the two readings buy</h1>
+    <p class="sub">Depth is a cross-ratio, so a single frame can be decoded — the codec, the spheres, the budget, and the doubled rig</p>
+  </header>
+
+  <p>Five chapters have said what the two readings are and where they agree. This one shows what they are for. A sphere seen through a pinhole is a circle at any distance; seen through crossed slits it is an ellipse, and the stretch is a function of depth. Once that function is recognised as a <button class="term" data-t="crossratio">cross-ratio</button> along the ray — a Möbius map, invertible by geometry rather than inference — a flat image of round targets is a volumetric recording, and a camera that could not triangulate becomes one that can decode. That is the cross-slit reading cashed. The glide reading is cashed in the same coin: the same anisotropy the camera reads as depth is the cost the draftsman pays for breadth, and it comes with a budget that says, before a plate is drawn, which projection a scene belongs to. The chapter ends by doubling the rig, where the neutral surface of Chapter&nbsp;3 turns out to be a horopter.</p>
+
+  <div class="thm">
+    <span class="label">Theorem 7 · aspect = cross-ratio</span>
+    <p>On the ray through a scene point P sit three fixed fiducials — F₁ on the vertical slit, F₂ on the horizontal slit, S on the screen — and P. A round target at P images to an ellipse whose aspect ratio is exactly AR(P)&nbsp;=&nbsp;(F₁,&nbsp;F₂;&nbsp;S,&nbsp;P). In the rig, AR(z)&nbsp;=&nbsp;Z<sub>h</sub>(z&nbsp;−&nbsp;Z<sub>v</sub>)/(Z<sub>v</sub>(z&nbsp;−&nbsp;Z<sub>h</sub>)), with AR(350)&nbsp;=&nbsp;0.300, AR(z*)&nbsp;=&nbsp;−1 at the neutral surface, saturating to Z<sub>v</sub>/Z<sub>h</sub>&nbsp;=&nbsp;0.6 in the far field.</p>
+    <p>Corollaries. Decode is cross-ratio inversion, a Möbius function of AR. The target's size does not enter (size independence). On the working band z(AR) is convex, so symmetric noise pushes depth outward — the <button class="term" data-t="jensen">Jensen bias</button>. Two slits and a screen give exactly the three fiducials a ray needs; un-nominate the screen and the decode goes dark. And the <button class="term" data-t="kernel">depth gauge</button> — the map that slides every point along its own ray — is precisely the coordinate the image cannot see (Theorem 5.3): depth is what the two-slit image group moves, and calibration is what fixes it.</p>
+    <p style="font-size:.88rem;color:var(--grey);margin-bottom:0;">Provenance: the formula was written from the rig geometry as the codec's working law, and only afterwards recognised as Möbius and identified with the depth-dependent-aspect-ratio law of Yang, Lin, Kang &amp; Yu (2015), whose priority of publication is cited as such.</p>
+  </div>
+
+  <h2><span class="sn">6.1&nbsp;·</span> Depth from ellipticity</h2>
+  <p>The seed of everything else. Scatter known spheres through the field, image them through the slits, and read their depths off the width and height of the blobs — the scanner does it live, and demo&nbsp;17 shows that two spheres of very different size at the same depth cast the same aspect ratio, so the size was never in the signal. The scanner is also the instrument that reads several targets at once: depth per blob, instantly, with no correspondence problem, because each blob carries its own depth in its shape.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Tetra_engine_complete/14_tetra_spheres.html" title="Demo 14 — the multi-target depth scanner" height="620" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Demo 14 · the multi-target scanner</span><a href="https://flyingsticks.github.io/Tetra_engine_complete/14_tetra_spheres.html">Open full page →</a></div>
+    <figcaption class="cap">Round targets at several depths, one frame; the "CV system" measures each projected blob's width and height and returns z. Move the slits and watch the readings follow the rig. The engine's own palette: vertical slit blue, horizontal slit green.</figcaption>
+  </figure>
+
+  <h2><span class="sn">6.2&nbsp;·</span> The codec</h2>
+  <p>If aspect ratio encodes depth, then a two-dimensional video stream of round anchors carries a volume, and the receiver rebuilds it by geometry. The codec transmits a flat frame — positions, aspect ratios, colours — and the client decodes a point cloud you can orbit; no z ever crosses the wire. The prototype does this for a synthetic scene; the object codec does it for any .obj through a lossy channel, reporting bias and RMSE against the truth; the portrait does it for a violin under photographic light, every frame its own photograph encoded through the slits, thinned, and decoded, with occlusion recovered by painter-sorting on decoded depth. This is the point the chapter makes without a heading: the camera reading is not a drawing convention. It records.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Tetra_engine_complete/18_tetra_CODEC.html" title="Demo 18 — the tetra codec prototype" height="620" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Demo 18 · the codec</span><a href="https://flyingsticks.github.io/Tetra_engine_complete/18_tetra_CODEC.html">Open full page →</a></div>
+    <figcaption class="cap">Left, the transmitted 2D stream, where shape is depth; right, the decoded volumetric point cloud — drag to rotate. Demos 19–21 run the same codec on a knot, a cube, and a warped cube; sheet 33 on any dropped .obj with a JPEG stand-in for the channel; the violin portrait on a surfaced body.</figcaption>
+  </figure>
+
+  <h2><span class="sn">6.3&nbsp;·</span> The bargain and the budget</h2>
+  <p>Read from the drawing side, the same anisotropy is a price. Perspective spends its fidelity on depth — an unbounded size cue, a square that stays a square at every distance — and pays on breadth, with a radial marginal splay that admits no global repair. The glide inverts every term: gentler convergence, a metric aspect gauge, at the price of bowed depth lines and a bounded cue that saturates at Z<sub>v</sub>/Z<sub>h</sub>. The dial D is the allocation knob, and D&nbsp;=&nbsp;0 is the perspective allocation. The <button class="term" data-t="budget">budget</button> states the exchange as arithmetic. For a scene of breadth B and depth extent Δ drawn at separation D, the glide's residual anisotropy after the correction of Chapter&nbsp;3 is ε<sub>x</sub>&nbsp;=&nbsp;D·Δ&nbsp;/&nbsp;2(z₀−Z<sub>v</sub>)(z₀−Z<sub>h</sub>) to first order — linear in both depth and separation — while perspective's marginal splay grows with the square of the breadth. So the verdict is the comparison of Δ·D against B²: broad and shallow belongs to the glide, deep and narrow to perspective. The design rule falls out of it: match the projection's benign axis to the scene's large axis. A nave, a light-well, a corridor, a stair section — perspective. A façade, a wide wall section, a plan read as a horizontal cut — glide. The corridor plate is the deliberately wrong case, and its caption reported the failure before it was drawn: 40 wide, 600 deep, D&nbsp;=&nbsp;100; Δ·D&nbsp;=&nbsp;60,000 against B²&nbsp;=&nbsp;1,600; the depth lines bow with sagitta 1.5 on a 44-unit chord and the cue saturates toward 0.6.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="calibration-room-v2.html" title="The calibration room — the dial, both readings, the neutral surface and the budget" height="700" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>The calibration room · v2</span><a href="calibration-room-v2.html">Open full page →</a></div>
+    <figcaption class="cap">The instrument in which the dial, both readings, the neutral surface and the budget are one object. The panel closes the calibrated reading live — decode(AR) against the room's true working depth — carries the ▢ correction with its first-order residual, the bow of a corner depth line, and Δ·D against B². Presets: the rig; perspective at D&nbsp;=&nbsp;0; the wide section (4,000 against 25,600 — glide); the corridor (60,000 against 1,600 — perspective).</figcaption>
+  </figure>
+  <p>One thing to say plainly about the budget's standing. The glide side of the criterion, ε<sub>x</sub>, is a derivation, and the calibration room's check script re-verifies it against the band-end residual, along with the corridor's sagitta and aspect values and both budget verdicts. The B² side is traceable to the essay's account of radial splay, and the addendum that carried its derivation and constants (A13, with its check script) is not in the record. Until it is recovered or re-derived, Δ·D against B² is a well-motivated criterion with a working arithmetic on the glide side and a stated but unshown constant on the perspective side — a comparison of magnitudes across a threshold the essay never fixes, which sorts plans and wide sections far to one side and corridors far to the other. The plates it sorts are correct; what is owed is the derivation.</p>
+
+  <h2><span class="sn">6.4&nbsp;·</span> Doubling the rig</h2>
+  <p>Take two cross-slit projections of the same scene, the second the first rotated 90° about the shared axis of sight, and depth can be <em>read</em> rather than computed — in two mechanically distinct ways at once. The positional channel: within one rig no two rays meet, but across the pair concurrence returns pointwise, and a scene point is triangulated by one ray of each channel, with a single consistency constraint, s<sub>A</sub>·t<sub>A</sub>&nbsp;=&nbsp;s<sub>B</sub>·t<sub>B</sub>, in the same product form as the split norm. The shape channel: the rotation swaps the roles of the two magnifications, so the channels measure exactly reciprocal aspect ratios, AR<sub>B</sub>&nbsp;=&nbsp;1/AR<sub>A</sub>, and the <button class="term" data-t="disparity">disparity</button> is their ratio, D(z)&nbsp;=&nbsp;AR<sub>A</sub>². The zero-disparity surface, where the two channels fuse, is found by blind root-search at z*&nbsp;=&nbsp;187.5 — the neutral surface, the harmonic locus of Chapter&nbsp;3 and the collapsed stratum of Chapter&nbsp;4, now playing the part fixation plays in binocular vision. The <button class="term" data-t="horopter">horopter</button>. And its acuity law is the stereo law: log-disparity sensitivity S(z)&nbsp;=&nbsp;2Δ/((z−Z<sub>v</sub>)(z−Z<sub>h</sub>)), highest at the horopter, falling as 2Δ/z² in the far field — the b·f/z² law of two eyes, with the slit separation as a baseline pointing down the axis instead of across it. The shape channel is exactly twice as depth-sensitive as the positional one on a log scale, everywhere.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Double-slit-project/34%20tetra%20dual%20crossslit.html" title="Sheet 34 — the dual cross-slit, shape stereopsis" height="680" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>Sheet 34 · dual cross-slit · A10</span><a href="https://flyingsticks.github.io/Double-slit-project/34%20tetra%20dual%20crossslit.html">Open full page →</a></div>
+    <figcaption class="cap">Two channels 90° apart; disparity is shape, not offset. Drag depth and the two ellipses change reciprocally. Raise the impostor — intrinsic ellipticity times PSF asymmetry — and the single channel drifts while the dual ratio cancels it exactly; add noise and the pair gains √2. Go to horopter puts the target on the neutral surface.</figcaption>
+  </figure>
+  <p>What the second channel buys is stated in the dictionary of A10: two eyes, two channels; positional disparity, shape disparity; horopter, neutral surface; vergence, slit depth — with the honest difference that the rig's horopter is fixed by construction, and moving it would mean physically moving the slits. What it settles for this book is the sentence Chapter&nbsp;4 ended on. The orbit collapse of the reordering group, the parity balance of the magnifications, and the fusion depth of the doubled camera are one harmonic fact read in three charts.</p>
+
+  <section class="companions">
+    <h2>Companions to this chapter</h2>
+    <ul>
+      <li><a href="https://flyingsticks.github.io/Double-slit-project/27%20tetra%20aperture%20crossratio.html">Sheet 27 · aperture cross-ratio</a> (Theorem 7 live, with the solver) and <a href="https://flyingsticks.github.io/Double-slit-project/calibrated.html">the calibrated reading</a> — Depth&nbsp;=&nbsp;cross-ratio, nominating the screen</li>
+      <li><a href="https://flyingsticks.github.io/Double-slit-project/30%20tetra%20depth%20gauge.html">Sheet 30 · the depth gauge</a> — Theorem 5.3, the coordinate the image cannot see; <a href="https://flyingsticks.github.io/Double-slit-project/26%20tetra%20dual%20view.html">sheet 26 · dual view</a> — the image is the ray space</li>
+      <li><a href="https://flyingsticks.github.io/Tetra_engine_complete/15_tetra_aspect_ration_depth.html">Demo 15</a>, <a href="https://flyingsticks.github.io/Tetra_engine_complete/17_tetra_spheres_size_variation.html">demo 17</a> — the AR(z) law and size independence</li>
+      <li><a href="https://flyingsticks.github.io/Tetra_engine_complete/19_tetra_CODEC_knot.html">Codec 19</a>, <a href="https://flyingsticks.github.io/Tetra_engine_complete/20_tetra_CODEC_cube.html">20</a>, <a href="https://flyingsticks.github.io/Tetra_engine_complete/21_tetra_CODEC_cube_warped.html">21</a>; <a href="https://flyingsticks.github.io/Double-slit-project/33%20tetra%20codec%20v22%20object.html">sheet 33 · object codec</a>; <a href="https://flyingsticks.github.io/Double-slit-project/violin%20portrait%20codec%20v5.html">the violin portrait</a>; the <a href="https://github.com/flyingsticks/Tetra_engine_complete">codec README</a></li>
+      <li><a href="https://flyingsticks.github.io/Lumped-together/code-5.html">Dual cross-slit, canvas</a> (code-5) and <a href="https://flyingsticks.github.io/Double-slit-project/A10%20stereopsis.pdf">A10 · Stereopsis of the dual cross-slit</a></li>
+      <li><a href="The-Harmonic-Seam-DraftC1.html">The Harmonic Seam</a>, Draft C.1 §§III, IV, IX — the text this chapter is drawn from</li>
+    </ul>
+    <p class="checks"><strong>This chapter checks:</strong> <a href="check-calibration-room-v2.js">check-calibration-room-v2.js</a> 32/32 (AR&nbsp;=&nbsp;cross-ratio and its Möbius decode; AR(350)&nbsp;=&nbsp;0.300; z*&nbsp;=&nbsp;187.5 with AR(z*)&nbsp;=&nbsp;−1 for every D; the three means; gauge product m·g&nbsp;=&nbsp;1; one reciprocal factor squares the frame; ε<sub>x</sub> matches the band-end residual to first order; bow O(Δ²); corridor sagitta 1.5 on 44.3; both budget verdicts) · check_stereopsis.js 22/22 (A10: concurrence across channels to 1.8e−14; epipolar identity to 3.5e−16; AR<sub>A</sub>·AR<sub>B</sub>&nbsp;=&nbsp;1 to 1.5e−10; horopter 187.500000000 by blind search; S(z) to 2.2e−9; √2 gain measured 1.434) · geometry_checks.py (Theorem 7 and corollaries) · check depthgauge, check dualview (rendered PDFs) · check_aspect.js. <strong>Not in the record:</strong> A13 and check_a13_budget.js — the B² derivation; see §6.3.</p>
+  </section>
+
+  <nav class="chnav" aria-label="Chapter navigation">
+    <a href="chapter-5.html"><span class="dir">← Previous</span>Chapter 5 · Duality</a>
+    <a href="index.html" style="align-self:center;">Contents</a>
+    <span class="off" style="text-align:right;"><span class="dir">Next →</span>Chapter 7 · Plates<br><small>in preparation</small></span>
+  </nav>
+</main>
+
+<div id="gloss-card" hidden role="dialog" aria-label="Glossary definition">
+  <button class="close" aria-label="Close definition">×</button>
+  <span id="gloss-body"></span>
+  <a class="more" href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">Full glossary →</a>
+</div>
+
+<script>
+(function(){
+  var defs = {
+    crossratio: "<b>Cross-ratio along the ray.</b> (F₁, F₂; S, P): the two slit feet, the screen point and the scene point on one line. Theorem 7: it equals the aspect ratio a round target at P casts. Depth is therefore a projective coordinate, invertible by a Möbius map.",
+    jensen: "<b>Jensen bias.</b> On the working band the decode z(AR) is convex, so symmetric noise in AR pushes the expected depth outward — E[ẑ] − z > 0. A property of the geometry, not the solver.",
+    kernel: "<b>Depth gauge (Theorem 5.3).</b> The map that fixes both slits pointwise and slides every point along its own ray. The cross-slit image is frozen by it: depth is exactly the coordinate the image group cannot see, and calibration (nominating the screen and the metric) is what turns that invisible freedom into a measured number.",
+    budget: "<b>Budget.</b> The quantitative form of the bargain: a projection has a fixed quantity of fidelity, allocated between depth and breadth by the dial D. The criterion compares Δ·D (the glide's residual anisotropy, linear in depth extent and separation) against B² (perspective's marginal splay, quadratic in breadth).",
+    disparity: "<b>Shape disparity.</b> In the doubled rig the two channels measure reciprocal aspect ratios; their ratio D(z) = AR<sub>A</sub>² is the disparity signal, and it lives in shape rather than position. Confounds that multiply both channels alike cancel in it exactly.",
+    horopter: "<b>Horopter.</b> In binocular vision, the surface of zero disparity through the fixation point. In the doubled rig it is the neutral surface z* = 187.5, where D = 1 and the channels fuse — fixed by the rig rather than by vergence."
+  };
+  var card = document.getElementById('gloss-card'),
+      body = document.getElementById('gloss-body'),
+      open = null;
+  function hide(){ card.hidden = true; if(open){ open.setAttribute('aria-expanded','false'); open = null; } }
+  document.querySelectorAll('button.term').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', function(){
+      if(open === b){ hide(); return; }
+      hide();
+      body.innerHTML = defs[b.dataset.t] || '';
+      card.hidden = false; open = b; b.setAttribute('aria-expanded','true');
+    });
+  });
+  card.querySelector('.close').addEventListener('click', hide);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+})();
+</script>
+</body>
+</html>

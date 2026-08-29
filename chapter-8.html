@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 8 · The frame — One Congruence, Two Readings</title>
+<style>
+  :root {
+    --cream:#faf6ef; --plum:#43203f; --purple:#6a2c91; --crimson:#c0322b;
+    --gold:#b08948; --teal:#177f75; --ink:#2b2226; --grey:#6b6360; --rule:#e2d9c8;
+  }
+  html { background: var(--cream); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; color: var(--ink); background: var(--cream);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem;
+  }
+  .eyebrow a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+  h1 { font-size: 2.4rem; line-height: 1.08; margin: 0 0 .35rem; color: var(--plum); font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-style: italic; font-size: 1.18rem; color: var(--purple); margin: 0 0 1.8rem; line-height: 1.4; }
+  h2 { font-size: 1.4rem; color: var(--plum); margin: 2.6rem 0 .9rem; line-height: 1.25; }
+  h2 .sn { color: var(--gold); font-weight: 400; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--purple); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  a:hover, a:focus-visible { color: var(--crimson); border-bottom-style: solid; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  em { color: inherit; }
+
+  /* Theorem box */
+  .thm { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; }
+  .thm .label { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .thm p { margin-bottom: .5rem; }
+  .thm ol { margin: .2rem 0 .4rem 1.2rem; padding: 0; }
+  .thm li { margin-bottom: .25rem; }
+
+  table.six { border-collapse: collapse; width: 100%; font-size: .9rem; margin: 1rem 0 1.4rem; }
+  table.six th, table.six td { text-align: left; padding: .35rem .5rem .35rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  table.six th { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  table.six td:first-child { color: var(--plum); font-weight: 700; white-space: nowrap; }
+
+  /* Instrument embeds */
+  figure.inst { margin: 1.6rem 0 2rem; }
+  .inst-frame { border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: #fff; }
+  .inst iframe { display: block; width: 100%; border: 0; }
+  .inst-bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
+    padding: .45rem .1rem 0;
+  }
+  .inst-bar a { color: var(--purple); letter-spacing: .12em; }
+  figcaption.cap { font-size: .88rem; color: var(--grey); line-height: 1.5; padding: .5rem .1rem 0; text-transform: none; letter-spacing: 0; font-family: Georgia, serif; }
+
+  /* Glossary terms */
+  button.term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    border-bottom: 1px dotted var(--teal);
+  }
+  button.term[aria-expanded="true"] { color: var(--teal); border-bottom-style: solid; }
+  #gloss-card {
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem)); background: #fffdf8; color: var(--ink);
+    border: 1px solid var(--gold); border-radius: 4px; box-shadow: 0 6px 24px rgba(43,34,38,.18);
+    padding: .9rem 1.1rem; font-size: .95rem; line-height: 1.55; z-index: 50;
+  }
+  #gloss-card[hidden] { display: none; }
+  #gloss-card b { color: var(--plum); }
+  #gloss-card .close { float: right; margin-left: .8rem; border-bottom: none; font-size: 1.1rem; line-height: 1; background:none; border:none; color: var(--grey); cursor: pointer; }
+  #gloss-card .more { display: block; margin-top: .4rem; font-size: .85rem; }
+
+  /* Companions + checks */
+  .companions { border-top: 1px solid var(--gold); margin-top: 3rem; padding-top: 1rem; }
+  .companions h2 { margin-top: 0; font-size: 1.05rem; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .companions ul { margin: 0; padding: 0 0 0 1.1rem; font-size: .95rem; line-height: 1.7; }
+  .checks { font-size: .88rem; color: var(--grey); border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; line-height: 1.6; }
+
+  /* Chapter nav */
+  nav.chnav { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--gold);
+    margin-top: 2.2rem; padding-top: 1rem; font-size: .95rem; }
+  nav.chnav .dir { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; }
+  nav.chnav .off { color: var(--grey); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow"><a href="index.html">One Congruence, Two Readings</a> · Chapter 8</p>
+    <h1>The frame: what is a geometry?</h1>
+    <p class="sub">The ladder both methods climb, arrived at last</p>
+  </header>
+
+  <p>This book has been written from the theorems up. Seven chapters drew one congruence twice, found the seam where the drawings agree, measured the split by one cubic, put a group on each channel, dualized, cashed the readings, and redrew the plates. Only now, with the results in hand, is it worth asking what kind of thing they are results <em>in</em>. The answer has two halves that turn out to be one. Cross-slit projection admits a synthetic geometry in Hilbert's sense — primitives, axioms, theorems, with Euclid's five postulates read through the two slits and their fates recorded — and it admits a transformational geometry in Klein's sense, a space with a group whose invariants are its theorems. Two descriptions, certified equivalent both ways. And both climb the same ladder of levels, projective to affine to metric to Euclidean, which is the ladder the whole book has been standing on without naming: the seam of Chapter&nbsp;3 is its top rung made visible, and the split is the ground beneath it that the ladder cannot see.</p>
+
+  <div class="thm">
+    <span class="label">One object, two descriptions</span>
+    <p><b>Synthetic (Hilbert).</b> What must be true? Undefined primitives — ray, foot, pencil, chain — and axioms about incidence: Group I, the camera in space (C1 threading, C2 non-concurrence, C3 pencil flatness); Group II, the image (M0 grid, M1 three-ray, M2 touching, M3 richness, M4 Miquel closure). M0–M3 are Benz's axioms of a Minkowski plane. <b>Theorem 2 (Representation):</b> a Minkowski plane satisfying M4 is the chain geometry over ℝ&nbsp;⊕&nbsp;ℝ — the synthetic axioms force the classical model.</p>
+    <p><b>Transformational (Klein).</b> What is preserved? The double-slit group G, the subgroup of PGL(4,&nbsp;ℝ) stabilizing the slit pair: two components, identity and swap; acting on ray space through (PGL(2)&nbsp;×&nbsp;PGL(2))&nbsp;⋊&nbsp;ℤ₂; kernel a one-parameter group, the depth gauge of Theorem 5.3. <b>Theorem 5.4 (fundamental theorem):</b> every automorphism of the abstract structure is induced by G.</p>
+    <p style="font-size:.88rem;color:var(--grey);margin-bottom:0;">Theorem 2 ⇄ Theorem 5.4 is the bridge: the two describe the same plane. Verified in geometry_checks.py; the load-bearing pieces each have a demo and a headless script in the companion.</p>
+  </div>
+
+  <h2><span class="sn">8.1&nbsp;·</span> The synthetic geometry, and the seam it is named for</h2>
+  <p><a href="https://flyingsticks.github.io/Double-slit-project/double%20slit%20geometry.md">Double-Slit Geometry: Definitions, Axioms, and Theorems</a> is the text (its print form is the <a href="https://flyingsticks.github.io/Double-slit-project/double%20slit%20geometry%20revised.pdf">revised PDF</a>). Its model is the rig of every chapter: two skew slits, the seam, and the rays that meet both. Its first fact is that every scene point off the seam lies on exactly one ray (C1), and its governing fact is that two distinct rays meet if and only if they share a foot, on the seam (C2). <a href="https://flyingsticks.github.io/Double-slit-project/The%20Seam.md">The Seam</a> unpacks that axiom: the meetings a pinhole spends all at once at one interior point — ∞² rays through a centre — the double slit sorts and relocates, one dimension of concurrence along each slit, x-meetings deported to one line and y-meetings to the other at two different depths. That factorization is <button class="term" data-t="dissociation">anamorphic dissociation</button>, and it is why depth becomes measurable: the pinhole organizes the image completely, once, at one depth, leaving nothing to compare; the double slit organizes it twice, partially, at Z<sub>v</sub> and Z<sub>h</sub>, and the mismatch between the two partial organizations is exactly what Theorem 7 reads off as the aspect ratio. Off the seam the interior is meeting-free, which is what makes the address (s,&nbsp;t) a coordinate system; on the seam the address does not vanish but blows up.</p>
+  <p>The rest of the document's theorems are the ones the earlier chapters used. Theorem&nbsp;3, the Bowing Theorem: the image of a line is a <button class="term" data-t="chain">chain</button>, the graph of a Möbius map, straight exactly when its chart coefficient vanishes, a cross when the line meets a slit (Chapter&nbsp;1). Theorem&nbsp;4, regulus ambiguity. Theorem&nbsp;5, the Erlangen theorem, and D8, the bi-cross-ratio (λ,&nbsp;μ) with 6a completeness and 6b the chain criterion (Chapter&nbsp;4). Theorem&nbsp;7, the aperture cross-ratio (Chapter&nbsp;6). And §7, the hierarchy — projective, affine, calibrated — which is the ladder of §8.3 in the document's own coin. The companion puts one interactive diagram beside each load-bearing piece, on the same calibrated rig, each shipping with a headless check.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Double-slit-project/geometry%20companion.html" title="Double-Slit Geometry — interactive companion, demos 25–34" height="700" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>The geometry companion · demos 25–34</span><a href="https://flyingsticks.github.io/Double-slit-project/geometry%20companion.html">Open full page →</a></div>
+    <figcaption class="cap">One diagram per axiom and theorem: threading (C1), dual view (C2, the image is the ray space), the aperture cross-ratio (Thm&nbsp;7), bowing (Thm&nbsp;3), the chain criterion (6b), the depth gauge (5.3), the pinhole collapse, incidence inversion, the codec and the doubled rig. Read a section, then drag the corresponding picture.</figcaption>
+  </figure>
+
+  <h2><span class="sn">8.2&nbsp;·</span> Euclid read through two slits</h2>
+  <p>The project's founding brief — <a href="https://flyingsticks.github.io/Double-slit-project/Cross-slit-projection.pdf">The Exact Refusal</a>, the provenance document — asked for a Euclidean geometry with a rewritten fifth postulate, and allowed that it might not be possible. <a href="https://flyingsticks.github.io/Double-slit-project/five%20postulates.md">The Five Postulates</a> and <a href="https://flyingsticks.github.io/Double-slit-project/euclids%20five%20revisited.pdf">Euclid's Five, Revisited</a> pay that debt one postulate at a time, each fate verified. Points become rays, lines and circles fuse into chains, congruence becomes the group G, and the right angle becomes harmonic separation. The outcome, stated up front in the note: the first three survive, with the join count shifted and the compass strengthened; the fourth is false as written and must be revised, because in this geometry right angles come in kinds; the fifth stands unchanged in form while the single word <em>parallel</em> beneath it quietly reverses its meaning.</p>
+  <table class="six">
+    <tr><th>postulate</th><th>fate in double-slit geometry</th></tr>
+    <tr><td>I · to join</td><td>survives, modified — two rays earn a pencil of chains, three fix one (M1); a parallel pair, sharing a foot, is joined by nothing</td></tr>
+    <tr><td>II · to produce</td><td>survives, strengthened — a chain is a bidegree-(1,1) curve, closed: every chain is a topological circle</td></tr>
+    <tr><td>III · to describe a circle</td><td>collapses downward — the circle is the chain, a projective object; the compass never needed the metric</td></tr>
+    <tr><td>IV · right angles equal</td><td>breaks — the split metric gives two angle measures; right angles come in kinds; demoted to Theorem&nbsp;6a on the diagonal</td></tr>
+    <tr><td>V · parallels</td><td>stands in form, meaning reverses — parallels are the pairs that <em>do</em> meet, on the seam</td></tr>
+  </table>
+  <p>Sheet 35 — the drafting board of Chapter&nbsp;1 — is the frontispiece of that note: the sheet on which all five postulates are performed with a straightedge and two disagreeing eyes. The book therefore opens and closes on the same instrument, read first as a drawing and last as a constitution.</p>
+
+  <h2><span class="sn">8.3&nbsp;·</span> The ladder both methods climb</h2>
+  <p>Nominate more structure and the group shrinks (Klein) as axiom groups accrue (Hilbert); at the metric rung, description becomes instrument. That is the ladder, and it is not Klein's private property — both descriptions climb the same rungs, each naming the ascent in its own coin. Projective: nominate the slit pair; the group is G, the invariants are incidence, chains and the bi-cross-ratio, and depth is still a free <button class="term" data-t="gauge">gauge</button> (Theorem&nbsp;5.3). Affine: add the plane at infinity; parallelism and ratio along a ray become meaningful. Metric, which the document calls <button class="term" data-t="calibrated">calibrated</button>: add the screen, and the three fiducials F₁, F₂, S play the part of the absolute — Theorem&nbsp;7 is a Cayley–Klein instance, a measurement turned back into a cross-ratio against a nominated figure, and the depth gauge is fixed. Euclidean: add the rig's actual numbers, Z<sub>v</sub>&nbsp;=&nbsp;150, Z<sub>h</sub>&nbsp;=&nbsp;250, and the last free number, absolute scale, is pinned; z*&nbsp;=&nbsp;187.5 becomes a depth instrument. Read down the gauge column and each nomination closes one degree of freedom; the crimson line on the chart sits exactly where the last parameter that mattered operationally — depth — gets pinned. And the five postulates sort by height: the lower a postulate sits, the better it survives, and the one that fails is the highest, most purely metric — angle-homogeneity.</p>
+  <figure class="inst">
+    <div class="inst-frame">
+      <iframe src="https://flyingsticks.github.io/Lumped-together/Taxonomy2.html" title="What Is a Geometry? — the ladder both methods climb" height="760" loading="lazy"></iframe>
+    </div>
+    <div class="inst-bar"><span>What is a geometry? · rev.&nbsp;2</span><a href="https://flyingsticks.github.io/Lumped-together/Taxonomy2.html">Open full page →</a></div>
+    <figcaption class="cap">Axis 1, two descriptions of one object; Axis 2, the ladder — tap a rung. Three borrowed words examined: <em>calibrated</em> (vision's name for the metric rung), <em>metric</em> (cross-ratio against a nominated absolute), <em>gauge</em> (the physicists' slack each rung removes). Euclid sorted by the ladder in Table&nbsp;3. The chart carries its own caveats: the gauge-fixing reading is an interpretation layered on the document, not a theorem of it; the Hilbert column runs out one rung early, since a unit is a chosen segment, not an axiom.</figcaption>
+  </figure>
+
+  <h2><span class="sn">8.4&nbsp;·</span> Where the book stands on it</h2>
+  <p>Now the frame can be set around the seven chapters. The rate square of Chapter&nbsp;1 is the space of two-slit congruences, and its seam — the diagonal and the two zero edges — is the top of this ladder made visible. The diagonal is the pinhole: a homography, the projective rung. The origin is orthographic: an affinity, the affine rung. The two zero edges are the pushbrooms, one foot on each. On that locus the two readings fuse, and the classical Erlangen classification — which sorts geometries by their self-maps — sees everything there is to see. Off the seam the congruence is two-slit in earnest, the camera image is no longer a plane self-map, it leaves the homography group, and the readings split. That is precisely the ground the ladder cannot classify, and it is exactly where the glide lives: the non-optical content of the 1984 construction is not a mood but a locus, measured by Δ, standing one floor below the rung where Klein's method runs out. The book's title is the report of that fact. There is one congruence. The ladder names the readings that coincide on it. The seam is where a drawing and a camera agree, and the rest of the square is the room the draftsman has that the camera does not — a room with a group, a duality, a budget, and a set of plates, all of which the earlier chapters furnished before this one gave it a name.</p>
+
+  <section class="companions">
+    <h2>Companions to this chapter</h2>
+    <ul>
+      <li><a href="https://flyingsticks.github.io/Double-slit-project/double%20slit%20geometry.md">Double-Slit Geometry</a> (text) · <a href="https://flyingsticks.github.io/Double-slit-project/double%20slit%20geometry%20revised.pdf">revised PDF</a> (print form) · <a href="https://flyingsticks.github.io/Double-slit-project/geometry%20addenda.pdf">addenda A1–A8</a> · <a href="https://flyingsticks.github.io/Double-slit-project/geometry%20checks.pdf">geometry checks</a> (<a href="https://flyingsticks.github.io/Double-slit-project/geometry%20checks.py">.py</a>). Earlier drafts (essay, section 9) superseded.</li>
+      <li><a href="https://flyingsticks.github.io/Double-slit-project/The%20Seam.md">The Seam</a> — shared feet and exiled meetings; <a href="https://flyingsticks.github.io/Double-slit-project/chain.html">the chain</a>; <a href="https://flyingsticks.github.io/Double-slit-project/25%20tetra%20threading%20explorer.html">sheet 25 · threading</a>; <a href="https://flyingsticks.github.io/Double-slit-project/29%20tetra%20chain%20criterion.html">sheet 29 · chain criterion</a>; <a href="https://flyingsticks.github.io/Double-slit-project/22%20tetra%20STU%20skewer.html">sheet 22 · STU</a>; <a href="https://flyingsticks.github.io/Double-slit-project/23%20tetra%20FCC%20crossslit.html">sheet 23 · FCC</a></li>
+      <li><a href="https://flyingsticks.github.io/Double-slit-project/five%20postulates.md">The Five Postulates</a> and <a href="https://flyingsticks.github.io/Double-slit-project/euclids%20five%20revisited.pdf">Euclid's Five, Revisited</a>; <a href="https://flyingsticks.github.io/Double-slit-project/Cross-slit-projection.pdf">The Exact Refusal</a> — the founding brief, kept as provenance</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-ladder-v1.html">The ladder</a> — structure as what a scramble cannot destroy; <a href="https://flyingsticks.github.io/Glide_projection/the-census-v1.html">the census</a> — count and incidence as the zeroth level; <a href="https://flyingsticks.github.io/Glide_projection/the-halfformed-v1.html">half-formed</a> — one coordinate settled, one open</li>
+      <li><a href="https://flyingsticks.github.io/Glide_projection/the-trichotomy-v2.html">The trichotomy</a> and <a href="https://flyingsticks.github.io/Glide_projection/the-fano-v1.html">Fano</a> — the harmonic undercarriage: why the diagonal triangle is a triangle, and the one geometry where it collapses</li>
+    </ul>
+    <p class="checks"><strong>This chapter checks:</strong> geometry_checks.py (Theorems 1–7 on the calibrated rig) · check_postulates.py (the five fates) · check_euclids_five.js 20/20 · the companion's headless scripts, one per demo (check_threading.js, collinearity 1.7e−15, among them) · check_census.js · check_halfformed.js 9/9 · the ladder's live invariant table. The gauge-fixing reading of the ladder and the Euclid-by-level sorting are editorial, built on those results, and are so marked on the chart.</p>
+  </section>
+
+  <nav class="chnav" aria-label="Chapter navigation">
+    <a href="chapter-7.html"><span class="dir">← Previous</span>Chapter 7 · Plates</a>
+    <a href="index.html" style="align-self:center;">Contents</a>
+    <a href="chapter-1.html" style="text-align:right;"><span class="dir">Begin again →</span>Chapter 1 · The congruence</a>
+  </nav>
+</main>
+
+<div id="gloss-card" hidden role="dialog" aria-label="Glossary definition">
+  <button class="close" aria-label="Close definition">×</button>
+  <span id="gloss-body"></span>
+  <a class="more" href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">Full glossary →</a>
+</div>
+
+<script>
+(function(){
+  var defs = {
+    dissociation: "<b>Anamorphic dissociation.</b> The double slit's factorization of concurrence by coordinate: x-meetings deported to one slit, y-meetings to the other, at two different depths. The pinhole spends its whole ∞² ray budget at one point; the double slit spends ∞¹ along each slit, and the mismatch between the two partial organizations is the depth signal.",
+    chain: "<b>Chain.</b> The image of a line skew to both slits: the set of rays meeting it, which on the screen is the graph of a Möbius map — a hyperbola with axis-parallel asymptotes, the split-signature sibling of the circle. Closed, as a bidegree-(1,1) curve in ℙ¹&nbsp;×&nbsp;ℙ¹. Lines and circles fuse into it.",
+    gauge: "<b>Gauge (physicists' sense).</b> A freedom of description the nominated structure has not yet pinned — an unbroken symmetry the group still moves. Depth is a free gauge at the projective rung (Theorem 5.3); the fiducials fix it at the metric rung; absolute scale waits for the Euclidean one. Distinct from the depth gauge of Chapter&nbsp;2, though the document's Theorem 5.3 is where the two senses meet.",
+    calibrated: "<b>Calibrated.</b> Vision's word for the metric rung: a camera is calibrated once its intrinsics are known, which is exactly what upgrades a reconstruction from projective or affine to metric. Here, nominating the screen supplies the three fiducials that turn the depth gauge into a coordinate. Of the three names for the rung, the only one that names the act of pinning structure to numbers."
+  };
+  var card = document.getElementById('gloss-card'),
+      body = document.getElementById('gloss-body'),
+      open = null;
+  function hide(){ card.hidden = true; if(open){ open.setAttribute('aria-expanded','false'); open = null; } }
+  document.querySelectorAll('button.term').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click', function(){
+      if(open === b){ hide(); return; }
+      hide();
+      body.innerHTML = defs[b.dataset.t] || '';
+      card.hidden = false; open = b; b.setAttribute('aria-expanded','true');
+    });
+  });
+  card.querySelector('.close').addEventListener('click', hide);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+})();
+</script>
+</body>
+</html>

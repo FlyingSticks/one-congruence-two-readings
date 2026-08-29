@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossary — One Congruence, Two Readings</title>
+<style>
+  :root {
+    --cream:#faf6ef; --plum:#43203f; --purple:#6a2c91; --crimson:#c0322b;
+    --gold:#b08948; --teal:#177f75; --ink:#2b2226; --grey:#6b6360; --rule:#e2d9c8;
+  }
+  html { background: var(--cream); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; color: var(--ink); background: var(--cream);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 17px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .eyebrow {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin: 0 0 .9rem;
+  }
+  .eyebrow a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+  h1 { font-size: 2.4rem; line-height: 1.08; margin: 0 0 .35rem; color: var(--plum); font-weight: 700; letter-spacing: -.01em; }
+  .sub { font-style: italic; font-size: 1.18rem; color: var(--purple); margin: 0 0 1.8rem; line-height: 1.4; }
+  h2 { font-size: 1.4rem; color: var(--plum); margin: 2.6rem 0 .9rem; line-height: 1.25; }
+  h2 .sn { color: var(--gold); font-weight: 400; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--purple); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  a:hover, a:focus-visible { color: var(--crimson); border-bottom-style: solid; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  em { color: inherit; }
+
+  /* Theorem box */
+  .thm { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1.1rem; margin: 1.4rem 0; }
+  .thm .label { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .35rem; }
+  .thm p { margin-bottom: .5rem; }
+  .thm ol { margin: .2rem 0 .4rem 1.2rem; padding: 0; }
+  .thm li { margin-bottom: .25rem; }
+
+  dl.gloss { margin: 1.4rem 0 0; }
+  dl.gloss dt { font-weight: 700; color: var(--plum); margin-top: 1.1rem; scroll-margin-top: 1rem; }
+  dl.gloss dt .ch { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-left: .6rem; }
+  dl.gloss dt a.anchor { color: inherit; border-bottom: none; }
+  dl.gloss dt:target { background: #fff5dc; box-shadow: 0 0 0 6px #fff5dc; border-radius: 2px; }
+  dl.gloss dd { margin: .25rem 0 0; font-size: .97rem; line-height: 1.55; }
+  nav.letters { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .8rem; letter-spacing: .1em; margin: 1.2rem 0 .4rem; line-height: 2; }
+  nav.letters a { margin-right: .5rem; border-bottom: none; }
+  nav.letters span { margin-right: .5rem; color: var(--rule); }
+
+  /* Instrument embeds */
+  figure.inst { margin: 1.6rem 0 2rem; }
+  .inst-frame { border: 1px solid var(--rule); border-top: 3px solid var(--gold); background: #fff; }
+  .inst iframe { display: block; width: 100%; border: 0; }
+  .inst-bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .72rem;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--grey);
+    padding: .45rem .1rem 0;
+  }
+  .inst-bar a { color: var(--purple); letter-spacing: .12em; }
+  figcaption.cap { font-size: .88rem; color: var(--grey); line-height: 1.5; padding: .5rem .1rem 0; text-transform: none; letter-spacing: 0; font-family: Georgia, serif; }
+
+  /* Glossary terms */
+  button.term {
+    font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer;
+    border-bottom: 1px dotted var(--teal);
+  }
+  button.term[aria-expanded="true"] { color: var(--teal); border-bottom-style: solid; }
+  #gloss-card {
+    position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem)); background: #fffdf8; color: var(--ink);
+    border: 1px solid var(--gold); border-radius: 4px; box-shadow: 0 6px 24px rgba(43,34,38,.18);
+    padding: .9rem 1.1rem; font-size: .95rem; line-height: 1.55; z-index: 50;
+  }
+  #gloss-card[hidden] { display: none; }
+  #gloss-card b { color: var(--plum); }
+  #gloss-card .close { float: right; margin-left: .8rem; border-bottom: none; font-size: 1.1rem; line-height: 1; background:none; border:none; color: var(--grey); cursor: pointer; }
+  #gloss-card .more { display: block; margin-top: .4rem; font-size: .85rem; }
+
+  /* Companions + checks */
+  .companions { border-top: 1px solid var(--gold); margin-top: 3rem; padding-top: 1rem; }
+  .companions h2 { margin-top: 0; font-size: 1.05rem; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .companions ul { margin: 0; padding: 0 0 0 1.1rem; font-size: .95rem; line-height: 1.7; }
+  .checks { font-size: .88rem; color: var(--grey); border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; line-height: 1.6; }
+
+  /* Chapter nav */
+  nav.chnav { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--gold);
+    margin-top: 2.2rem; padding-top: 1rem; font-size: .95rem; }
+  nav.chnav .dir { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: .68rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--gold); display: block; }
+  nav.chnav .off { color: var(--grey); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow"><a href="index.html">One Congruence, Two Readings</a> · Glossary</p>
+    <h1>Glossary</h1>
+    <p class="sub">Every term the chapters define on tap, collected once — 57 entries, each linked to the chapters that use it</p>
+  </header>
+
+  <p>The definitions here are the ones the chapters show when a dotted term is tapped, reconciled where two chapters had said the same thing in different words. Where one word carries two meanings in the book — <em>gauge</em> as the depth scale of Chapter&nbsp;2 and as the physicists' free description of Chapter&nbsp;8; <em>reciprocal</em> as the involution ρ and as the relation between the two graduations — both are entered and cross-named. Each entry links to itself, so a term can be cited as <code>glossary.html#neutral</code>. The rig throughout: picture plane at z&nbsp;=&nbsp;0, Z<sub>p</sub>&nbsp;=&nbsp;200, D&nbsp;=&nbsp;100, Z<sub>v</sub>&nbsp;=&nbsp;150, Z<sub>h</sub>&nbsp;=&nbsp;250, z*&nbsp;=&nbsp;187.5. The archive's earlier glossary, from the glide side alone, remains at <a href="https://flyingsticks.github.io/Glide_projection/the-glossary-v1.html">Glide_projection/the-glossary-v1</a>.</p>
+
+  <nav class="letters" aria-label="Jump to letter"><a href="#LA">A</a> <a href="#LB">B</a> <a href="#LC">C</a> <a href="#LD">D</a> <a href="#LE">E</a> <a href="#LF">F</a> <a href="#LG">G</a> <a href="#LH">H</a> <a href="#LI">I</a> <a href="#LJ">J</a> <span>K</span> <a href="#LL">L</a> <a href="#LM">M</a> <a href="#LN">N</a> <a href="#LO">O</a> <a href="#LP">P</a> <span>Q</span> <a href="#LR">R</a> <a href="#LS">S</a> <a href="#LT">T</a> <span>U</span> <span>V</span> <span>W</span> <span>X</span> <span>Y</span> <span>Z</span></nav>
+
+  <dl class="gloss">
+  <dt id="threecycle"> <span id="L3"></span><a class="anchor" href="#threecycle">3-cycle</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>ω = 1/(1−λ) and ω² = (λ−1)/λ, with ω³ = identity. No partner, no real still point; fixed only at e<sup>±iπ/3</sup>. τ∘σ = ω, so two involutions on one parameter force the 3-cycles to exist.</dd>
+  <dt id="dissociation"> <span id="LA"></span><a class="anchor" href="#dissociation">Anamorphic dissociation</a><span class="ch">Ch.&nbsp;8</span></dt>
+  <dd>The double slit's factorization of concurrence by coordinate: x-meetings deported to one slit, y-meetings to the other, at two different depths. The pinhole spends its whole ∞² ray budget at one point; the double slit spends ∞¹ along each slit, and the mismatch between the two partial organizations is the depth signal.</dd>
+  <dt id="anchor"><a class="anchor" href="#anchor">Anchor</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>The quadric whose pole–polar map is the chosen duality. The rig's canonical anchor is the sphere x² + y² + z² = Z₁Z₂: centre at the principal point, radius the geometric mean of the slit depths, slits mutually polar. Anharmonicity of the transport selects it.</dd>
+  <dt id="anharmonic"><a class="anchor" href="#anharmonic">Anharmonic group</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>The six Möbius maps that permute a cross-ratio under reordering of its four points — λ, 1−λ, 1/λ, 1/(1−λ), λ/(λ−1), (λ−1)/λ — isomorphic to S₃. Reordering acts through S₄; the Klein four-group acts trivially.</dd>
+  <dt id="armature"><a class="anchor" href="#armature">Armature</a><span class="ch">Ch.&nbsp;1, 7</span></dt>
+  <dd>The drawn incidence skeleton — lines, concurrences, axes, picture plane — the shadow of the congruence on the sheet. Shared by both readings; only the graduation along it differs. The six core armatures of the 1984 plate (p.&nbsp;93) are the six patterns of recession one gauge can produce, indexed by the rate pair.</dd>
+  <dt id="law"><a class="anchor" href="#law">Armature law</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>The shape of the image machinery: per-channel linear contraction toward a seat at a rate — straight depth lines, a rate pair, the vanishing structure. Summarized by (r<sub>u</sub>, r<sub>v</sub>).</dd>
+  <dt id="budget"> <span id="LB"></span><a class="anchor" href="#budget">Budget</a><span class="ch">Ch.&nbsp;6</span></dt>
+  <dd>The quantitative form of the bargain: a projection has a fixed quantity of fidelity, allocated between depth and breadth by the dial D. The criterion compares Δ·D (the glide's residual anisotropy, linear in depth extent and separation) against B² (perspective's marginal splay, quadratic in breadth).</dd>
+  <dt id="calibrated"> <span id="LC"></span><a class="anchor" href="#calibrated">Calibrated</a><span class="ch">Ch.&nbsp;8</span></dt>
+  <dd>Vision's word for the metric rung: a camera is calibrated once its intrinsics are known, which is exactly what upgrades a reconstruction from projective or affine to metric. Here, nominating the screen supplies the three fiducials that turn the depth gauge into a coordinate. Of the three names for the rung, the only one that names the act of pinning structure to numbers.</dd>
+  <dt id="calibration"><a class="anchor" href="#calibration">Calibration</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>A depth plane at which readings are pinned to agree; selects the gauge's representative. Glide practice's staging, generalized.</dd>
+  <dt id="chain"><a class="anchor" href="#chain">Chain</a><span class="ch">Ch.&nbsp;8</span></dt>
+  <dd>The image of a line skew to both slits: the set of rays meeting it, which on the screen is the graph of a Möbius map — a hyperbola with axis-parallel asymptotes, the split-signature sibling of the circle. Closed, as a bidegree-(1,1) curve in ℙ¹&nbsp;×&nbsp;ℙ¹. Lines and circles fuse into it.</dd>
+  <dt id="cochain"><a class="anchor" href="#cochain">Co-chained</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>Four scene points lying on one straight line, so that both slits see the same cross-ratio, λ = μ. The only quadruples on which the six-to-three collapse survives in double-slit geometry — and only at harmonic position.</dd>
+  <dt id="complement"><a class="anchor" href="#complement">Complement τ</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>x ↦ 1 − x. Reach's involution, the fold about the midpoint of the unit; fixes ½ and ∞.</dd>
+  <dt id="crossratio"><a class="anchor" href="#crossratio">Cross-ratio along the ray</a><span class="ch">Ch.&nbsp;6</span></dt>
+  <dd>(F₁, F₂; S, P): the two slit feet, the screen point and the scene point on one line. Theorem 7: it equals the aspect ratio a round target at P casts. Depth is therefore a projective coordinate, invertible by a Möbius map.</dd>
+  <dt id="crossslit"><a class="anchor" href="#crossslit">Cross-slit</a><span class="ch">Ch.&nbsp;1, 3</span></dt>
+  <dd>The optical construction: the congruence read as rays through two slits at two depths, graduated by foreshortening (the Turn gauge). Depth lines bow. Drawn purple.</dd>
+  <dt id="degenerate"> <span id="LD"></span><a class="anchor" href="#degenerate">Degenerate orbit</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>{0, 1, ∞}: two of the four points coincide. Same orbit size as harmonic, the other triple; on the board these are the picture plane, station and plane at infinity. j = ∞.</dd>
+  <dt id="depth-gauge"><a class="anchor" href="#depth-gauge">Depth gauge</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>The scale laid along the depth lines: Reach (equal steps, ∞ unmarked) or Turn (Möbius, ∞ at a finite mark) — the two graduations of Theorem 0. Free in the glide, welded in the cross-slit.</dd>
+  <dt id="kernel"><a class="anchor" href="#kernel">Depth gauge (Theorem 5.3)</a><span class="ch">Ch.&nbsp;6</span></dt>
+  <dd>The map that fixes both slits pointwise and slides every point along its own ray. The cross-slit image is frozen by it: depth is exactly the coordinate the image group cannot see, and calibration (nominating the screen and the metric) is what turns that invisible freedom into a measured number.</dd>
+  <dt id="diagonal"><a class="anchor" href="#diagonal">Diagonal action</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>One reordering of the four rays reorders both slit foot-quadruples at once: σ·(λ, μ) = (σλ, σμ). The orbit of the pair has size 6/|Stab(λ) ∩ Stab(μ)|.</dd>
+  <dt id="directing"><a class="anchor" href="#directing">Directing gauge g<sub>D</sub></a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>The board's 1/(1−k), which seats the directing axis on the six core armatures. It is the 3-cycle ω: on normalized depth it carries picture plane → station → plane at infinity → back.</dd>
+  <dt id="duality"><a class="anchor" href="#duality">Duality</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>A correlation of projective space: points ↔ planes, lines ↔ lines, joins ↔ meets, incidence preserved. Not one map but a whole family; a specific one, δ, must be chosen by an anchor.</dd>
+  <dt id="equianharmonic"> <span id="LE"></span><a class="anchor" href="#equianharmonic">Equianharmonic</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>λ² − λ + 1 = 0, λ = e<sup>±iπ/3</sup>: the orbit shrinks to two, fixed by the 3-cycle. Empty over the reals (discriminant −3, real minimum ¾). j = 0.</dd>
+  <dt id="fixed"> <span id="LF"></span><a class="anchor" href="#fixed">Fixed element</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>The one anharmonic map by which δ-conjugation of the glide reading differs from the cross-slit reading: ρ, the Reciprocal — arriving with the apparatus channel swap. Since ρτ = ω it converts the glide gauge τ into the camera gauge ω.</dd>
+  <dt id="gauge-freedom"> <span id="LG"></span><a class="anchor" href="#gauge-freedom">Gauge (physicists’ sense)</a><span class="ch">Ch.&nbsp;8</span></dt>
+  <dd>A freedom of description the nominated structure has not yet pinned — an unbroken symmetry the group still moves. Depth is a free gauge at the projective rung (Theorem 5.3); the fiducials fix it at the metric rung; absolute scale waits for the Euclidean one. Distinct from the depth gauge of Chapter&nbsp;2, though the document's Theorem 5.3 is where the two senses meet.</dd>
+  <dt id="glide"><a class="anchor" href="#glide">Glide</a><span class="ch">Ch.&nbsp;1, 3</span></dt>
+  <dd>The 1984 drawing construction: the congruence read as edges under parallel light, depth lines straight, graduated in equal steps (the Reach gauge). Drawn teal.</dd>
+  <dt id="harmonic"> <span id="LH"></span><a class="anchor" href="#harmonic">Harmonic cross-ratio</a><span class="ch">Ch.&nbsp;1, 3</span></dt>
+  <dd>Four collinear points with cross-ratio −1. Perspective manufactures it across the horizon; the cross-slit manufactures it at the neutral surface; on sheet 35·G the glide's equal depth marks fall in harmonic progression along the cross-slit's ray. Its orbit under reordering is {−1, ½, 2}.</dd>
+  <dt id="harmonicorbit"><a class="anchor" href="#harmonicorbit">Harmonic orbit</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>{−1, ½, 2}: cross-ratio −1 and its two reorderings. Each value is fixed by a different involution (−1 by the Reciprocal, ½ by the Complement, 2 by the Third). j = 1728.</dd>
+  <dt id="horopter"><a class="anchor" href="#horopter">Horopter</a><span class="ch">Ch.&nbsp;6</span></dt>
+  <dd>In binocular vision, the surface of zero disparity through the fixation point. In the doubled rig it is the neutral surface z* = 187.5, where D = 1 and the channels fuse — fixed by the rig rather than by vergence.</dd>
+  <dt id="invariant"> <span id="LI"></span><a class="anchor" href="#invariant">Invariant</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>What holds at every setting — Turn-side truth. The cross-ratio is the invariant every reading shares: three-pin coordinates on one line all report the same cross-ratio of four depths.</dd>
+  <dt id="involution"><a class="anchor" href="#involution">Involution</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>A map that is its own inverse. S₃ has three: the Reciprocal 1/λ, the Complement 1−λ, and the Third λ/(λ−1). Each fixes one harmonic value and one degenerate one.</dd>
+  <dt id="jinv"> <span id="LJ"></span><a class="anchor" href="#jinv">j-invariant</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>j(λ) = 256(λ²−λ+1)³/(λ²(λ−1)²), the complete invariant of a single orbit: 1728 harmonic, 0 equianharmonic, ∞ degenerate. For a pair (λ, μ) the j-pair is invariant but not complete.</dd>
+  <dt id="jensen"><a class="anchor" href="#jensen">Jensen bias</a><span class="ch">Ch.&nbsp;6</span></dt>
+  <dd>On the working band the decode z(AR) is convex, so symmetric noise in AR pushes the expected depth outward — E[ẑ] − z > 0. A property of the geometry, not the solver.</dd>
+  <dt id="joint"><a class="anchor" href="#joint">Joint</a><span class="ch">Ch.&nbsp;7</span></dt>
+  <dd>A cell boundary where two armatures meet. Rule 1 (no gaps or overlaps) makes the shear on the far side of a joint a forced consequence of the seat and the joint's position, not a choice.</dd>
+  <dt id="congruence"> <span id="LL"></span><a class="anchor" href="#congruence">Line congruence</a><span class="ch">Ch.&nbsp;1</span></dt>
+  <dd>A two-parameter family of lines: through a general point of space passes one line of the family, and in a general plane lies one. The two-slit congruence is the set of transversals of two skew slit lines. The only object in the book.</dd>
+  <dt id="mirror"> <span id="LM"></span><a class="anchor" href="#mirror">Mirror circle</a><span class="ch">Ch.&nbsp;3</span></dt>
+  <dd>The circle, radius the geometric mean of the slit depths, in which glide mark and cross-slit image are inverse points on the seam: VM·VI = VP².</dd>
+  <dt id="neutral"> <span id="LN"></span><a class="anchor" href="#neutral">Neutral surface</a><span class="ch">Ch.&nbsp;3</span></dt>
+  <dd>The depth z* = 2Z<sub>v</sub>Z<sub>h</sub>/(Z<sub>v</sub>+Z<sub>h</sub>) — the harmonic mean of the slit depths — where the two slits' magnifications exactly cancel and the aspect ratio passes through −1. Drawn gold throughout.</dd>
+  <dt id="orbstab"> <span id="LO"></span><a class="anchor" href="#orbstab">Orbit–stabiliser</a><span class="ch">Ch.&nbsp;4</span></dt>
+  <dd>|orbit| × |stabiliser| = 6 for every λ. Generic 6 × 1; harmonic 3 × 2; degenerate 3 × 2; equianharmonic 2 × 3 — the four ways six factors.</dd>
+  <dt id="page"> <span id="LP"></span><a class="anchor" href="#page">Page reading</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>The projective parameter of a pencil of planes through a slit, read off on the picture plane as a range of trace lines. The cross-slit coordinate X₀/(1 − λr<sub>u</sub>) is exactly this parameter — a theorem, not a numerical question.</dd>
+  <dt id="pin"><a class="anchor" href="#pin">Pin</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>A distinguished point that fixes one of the three Möbius freedoms of a coordinate on a line. Three pins make a ruler; the cross-slit's are placed by optics, the glide's are chosen.</dd>
+  <dt id="pinhole"><a class="anchor" href="#pinhole">Pinhole</a><span class="ch">Ch.&nbsp;1</span></dt>
+  <dd>The degenerate congruence in which both slits sit at one depth: every line passes through one centre, and the two readings coincide as maps. Classical perspective.</dd>
+  <dt id="planeinf"><a class="anchor" href="#planeinf">Plane at infinity</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>The fourth distinguished point of a line. A pin for both glide gauges (Reach sends it to ∞, Turn to 1); a probe for the cross-slit, whose image 1 − Z₂/Z₁ moves with the slits.</dd>
+  <dt id="polarity"><a class="anchor" href="#polarity">Polarity</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>A duality that is its own inverse, given by a symmetric matrix — pole and polar with respect to a conic or quadric. A canonical duality is exactly a marked polarity; the straightedge draws none, the compass draws one.</dd>
+  <dt id="pushbroom"><a class="anchor" href="#pushbroom">Pushbroom</a><span class="ch">Ch.&nbsp;1</span></dt>
+  <dd>The congruence with one slit at a finite depth and the other at infinity — a corner of the rate square, (1,0) or (0,1). Fused under both readings.</dd>
+  <dt id="ratesquare"> <span id="LR"></span><a class="anchor" href="#ratesquare">Rate square</a><span class="ch">Ch.&nbsp;1, 3, 7</span></dt>
+  <dd>The space of readings: a point (r<sub>u</sub>, r<sub>v</sub>) gives the linear contraction rate of each channel. Optical constructions sit on the corners and edges; glide constructions fill the interior.</dd>
+  <dt id="reach"><a class="anchor" href="#reach">Reach</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>The additive register: equal steps mean equal amounts; the slide preserves it; ∞ is pinned at ∞; the only involution is the Complement. The count, the covector, the stack of level planes.</dd>
+  <dt id="reading"><a class="anchor" href="#reading">Reading</a><span class="ch">Ch.&nbsp;1, 2</span></dt>
+  <dd>A congruence given a role — a rule for what the lines are (edges or rays) together with a graduation laid along them; exactly, a law together with a class of gauges (Chapter&nbsp;2). Glide and cross-slit are readings of one congruence, not rival skeletons.</dd>
+  <dt id="reciprocal-graduations"><a class="anchor" href="#reciprocal-graduations">Reciprocal graduations</a><span class="ch">Ch.&nbsp;3</span></dt>
+  <dd>The two readings mark the same line with graduations that are inverses of each other — their product is one. Where the marks coincide, the readings fuse.</dd>
+  <dt id="reciprocal"><a class="anchor" href="#reciprocal">Reciprocal ρ</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>x ↦ 1/x. Turn's involution, inversion in the mirror circle of radius 1; fixes ±1, exchanges 0 and ∞. With τ it generates the whole anharmonic group.</dd>
+  <dt id="selfdual"> <span id="LS"></span><a class="anchor" href="#selfdual">Self-dual</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>A configuration carried to itself by the anchoring duality. The class of cross-slit congruences is self-dual (meeting is self-dual); on the seam a single configuration is its own mirror image — fused means self-dual.</dd>
+  <dt id="disparity"><a class="anchor" href="#disparity">Shape disparity</a><span class="ch">Ch.&nbsp;6</span></dt>
+  <dd>In the doubled rig the two channels measure reciprocal aspect ratios; their ratio D(z) = AR<sub>A</sub>² is the disparity signal, and it lives in shape rather than position. Confounds that multiply both channels alike cancel in it exactly.</dd>
+  <dt id="slit"><a class="anchor" href="#slit">Slit</a><span class="ch">Ch.&nbsp;1</span></dt>
+  <dd>A line in a depth plane that every ray of the congruence must meet. The rig has a vertical slit at Z<sub>v</sub> = 150 (crimson) and a horizontal slit at Z<sub>h</sub> = 250 (purple); each magnifies its own axis by the perspective factor for its own depth.</dd>
+  <dt id="spine"><a class="anchor" href="#spine">Spine</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>The line every plane of a book passes through — under duality, a slit. Cross-slit (u, v) is the two page readings of the two books whose spines are the slits.</dd>
+  <dt id="stack"><a class="anchor" href="#stack">Stack</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>The glide's graduated family of parallel level planes — Reach's covector picture. Its dual in P³ is a book of planes.</dd>
+  <dt id="station"><a class="anchor" href="#station">Station</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>The point the Turn graduation sends to ∞ — the third pin, and the only one that is not a mark on the drawing. In perspective, the eye. Reach has no station.</dd>
+  <dt id="torsor"> <span id="LT"></span><a class="anchor" href="#torsor">Torsor</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>A set acted on freely and transitively by a group, with no distinguished element. The correlations of Pⁿ are a torsor under the projective group: any duality composed with any projectivity is another duality, so none is canonical without an anchor.</dd>
+  <dt id="transport"><a class="anchor" href="#transport">Transport</a><span class="ch">Ch.&nbsp;5</span></dt>
+  <dd>The map depth → depth induced by δ, read through the depth axis: z† = Z₁Z₂/z, an involution fixed at ±√(Z₁Z₂). In geometric-mean calibration it is the Reciprocal 1/ν.</dd>
+  <dt id="turn"><a class="anchor" href="#turn">Turn</a><span class="ch">Ch.&nbsp;2</span></dt>
+  <dd>The multiplicative register: equal steps mean equal ratios; the scale preserves it; ∞ is a marked point, so a station is sent to ∞ in its place; depth steps become the harmonic progression k/(k+1). Foreshortening, perspective, the cross-slit with both feet finite.</dd>
+  <dt id="typea"><a class="anchor" href="#typea">Type A transfer</a><span class="ch">Ch.&nbsp;7</span></dt>
+  <dd>Marks carried along a fibration — every depth station receives a true copy, and the fraction of the way along an edge is preserved exactly at every depth. The collector is the seat, where every part mark's depth line concurs. Contrast Type B sighting, marks collected through a point.</dd>
+  </dl>
+
+  <nav class="chnav" aria-label="Navigation">
+    <a href="index.html"><span class="dir">← Contents</span>One Congruence, Two Readings</a>
+    <a href="chapter-1.html" style="text-align:right;"><span class="dir">Begin →</span>Chapter 1 · The congruence</a>
+  </nav>
+</main>
+</body>
+</html>
